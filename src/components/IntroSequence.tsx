@@ -107,22 +107,54 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
           className="relative w-full flex flex-col items-center justify-center gap-10 md:gap-14 snap-start snap-always"
           style={{ height: '100svh' }}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.3, delay: 0.35, ease }}
-            className="relative"
-          >
-            <img
-              src="https://elevate-it.com/wp-content/uploads/2024/10/Elvete-logo-2-2048x333.png"
-              alt="Elevate"
-              className="w-[160px] md:w-[280px] h-auto object-contain"
-              style={{ filter: 'brightness(0) invert(1)' }}
+          <div className="flex items-center gap-10 md:gap-16">
+            <motion.div
+              initial={{ opacity: 0, x: -50, scale: 0.85 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 1.3, delay: 0.35, ease }}
+              className="relative"
+            >
+              <img
+                src="https://elevate-it.com/wp-content/uploads/2024/10/Elvete-logo-2-2048x333.png"
+                alt="Elevate"
+                className="w-[120px] md:w-[220px] h-auto object-contain"
+                style={{ filter: 'brightness(0) invert(1)' }}
+              />
+              <div
+                className="absolute -inset-4 -z-10 rounded-full opacity-20 blur-2xl"
+                style={{ backgroundColor: 'var(--vyb-cyan)' }}
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ scaleY: 0, opacity: 0 }}
+              animate={{ scaleY: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.8, ease }}
+              className="w-px h-10 md:h-14 origin-center"
+              style={{
+                background: `linear-gradient(to bottom, transparent, var(--vyb-teal), transparent)`,
+                opacity: 0.35,
+              }}
             />
-            <div
-              className="absolute -inset-4 -z-10 rounded-full opacity-20 blur-2xl"
-              style={{ backgroundColor: 'var(--vyb-cyan)' }}
-            />
+
+            <motion.div
+              initial={{ opacity: 0, x: 50, scale: 0.85 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 1.3, delay: 0.5, ease }}
+              className="relative"
+            >
+              <img
+                src="https://static.wixstatic.com/media/227dff_d4d02dbb309a4982990c4a17aadfe4b2~mv2.png"
+                alt="Nojara"
+                className="w-[120px] md:w-[220px] h-auto object-contain"
+                style={{ filter: 'brightness(0) invert(1)' }}
+              />
+              <div
+                className="absolute -inset-4 -z-10 rounded-full opacity-20 blur-2xl"
+                style={{ backgroundColor: 'var(--vyb-teal)' }}
+              />
+            </motion.div>
+          </div>
           </motion.div>
 
           <ScrollPulse />

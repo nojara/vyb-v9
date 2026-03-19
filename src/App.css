@@ -1,5 +1,4 @@
-/* app.css */
-/* Reset demo defaults so the presentation can own the full viewport */
+/* App shell — clear all demo defaults */
 
 #root {
   width: 100%;
@@ -9,18 +8,5 @@
   padding: 0;
   text-align: initial;
   isolation: isolate;
-}
-
-.logo,
-.logo.react,
-.card,
-.read-the-docs {
-  all: unset;
-  display: revert;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: none;
-  }
+  overflow-x: hidden;
 }

@@ -2,9 +2,9 @@ import { motion } from 'motion/react';
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
+import VideoEmbed from '@/components/VideoEmbed';
 import MediaPlaceholder from '@/components/MediaPlaceholder';
 import { GlassCard } from '@/components/ui/GlassCard';
-import VideoEmbed from '@/components/VideoEmbed';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
 import { useLanguage } from '@/context/LanguageContext';
 import { formatText } from '@/utils/formatText';
@@ -16,7 +16,10 @@ const CardGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index
   const cols = (slide.pillars?.length || 4) >= 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-2 lg:grid-cols-3';
 
   return (
-    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-20 pb-16 overflow-y-auto md:overflow-visible" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div
+      className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24 overflow-y-auto md:overflow-visible"
+      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+    >
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
       <div className="relative z-10 w-full max-w-6xl">
         <MotionBlock motionKey="spotlightFade" delay={0}>
@@ -27,14 +30,9 @@ const CardGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index
 
         {slide.headline && (
           <MotionBlock motionKey="maskReveal" delay={0.1}>
-            <motion.h2
-              className="vyb-section-title mb-8"
-              style={{ color: palette.primary }}
-              whileHover={{ x: 4 }}
-              transition={{ duration: 0.3 }}
-            >
+            <h2 className="vyb-section-title mb-8" style={{ color: palette.primary }}>
               {formatText(slide.headline)}
-            </motion.h2>
+            </h2>
           </MotionBlock>
         )}
 
@@ -45,12 +43,11 @@ const CardGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index
                 <MotionBlock key={i} motionKey="cardRise" delay={0.2 + i * 0.12} custom={i}>
                   <motion.div
                     whileHover={{
-                      scale: 1.06,
-                      y: -6,
-                      boxShadow: `0 16px 50px -12px ${palette.primary}30`,
+                      scale: 1.03,
+                      y: -4,
                     }}
                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    className="will-change-transform"
+                    className="will-change-transform clean-hover"
                   >
                     <GlassCard accentColor={palette.accent}>
                       <h3 className="vyb-label mb-3 tracking-widest" style={{ color: palette.primary }}>

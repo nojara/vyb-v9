@@ -3,7 +3,6 @@ import { motion } from 'motion/react';
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
-import MediaPlaceholder from '@/components/MediaPlaceholder';
 import { useMouseParallax } from '@/hooks/useMouseParallax';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
 import { useLanguage } from '@/context/LanguageContext';
@@ -17,14 +16,18 @@ const ManifestoSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; inde
   const mouse = useMouseParallax(containerRef, 18);
 
   return (
-    <div ref={containerRef} className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-24 pt-20 pb-16" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div
+      ref={containerRef}
+      className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-24 pt-20 pb-20 no-glitch"
+      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+    >
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
 
-      {/* Parallax floating ring */}
+      {/* Parallax floating ring — clean, no glitch */}
       <motion.div
         className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[300px] h-[300px] rounded-full border pointer-events-none opacity-10"
         style={{ borderColor: palette.primary }}
-        animate={{ x: mouse.x * 2, y: mouse.y * 2, rotate: mouse.rotateY }}
+        animate={{ x: mouse.x * 2, y: mouse.y * 2 }}
         transition={{ type: 'spring', stiffness: 40, damping: 25 }}
       />
 
@@ -36,7 +39,6 @@ const ManifestoSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; inde
               style={{ color: palette.primary }}
               animate={{ x: mouse.x * 0.3, y: mouse.y * 0.2 }}
               transition={{ type: 'spring', stiffness: 70, damping: 35 }}
-              whileHover={{ letterSpacing: '0.02em' }}
             >
               {formatText(slide.headline)}
             </motion.h2>
@@ -59,27 +61,15 @@ const ManifestoSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; inde
         {slide.body?.map((para, i) => (
           <MotionBlock key={i} motionKey="editorialSweep" delay={0.5 + i * 0.15}>
             <motion.p
-              className="vyb-body-lg opacity-70 mb-[var(--space-body-to-body)] max-w-3xl mx-auto"
+              className="vyb-body-lg opacity-70 mb-[var(--space-body-to-body)] max-w-3xl mx-auto clean-hover"
               style={{ color: palette.text }}
-              whileHover={{ opacity: 1, x: 4 }}
+              whileHover={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
             >
               {formatText(para)}
             </motion.p>
           </MotionBlock>
         ))}
-
-        {/* Media placeholder — editorial style */}
-        <div className="mt-8">
-          <MediaPlaceholder
-            style="panoramic"
-            accentColor={palette.primary}
-            textColor={palette.text}
-            label="EXPLORE"
-            delay={0.8}
-            imageSrc={slide.bgImage}
-          />
-        </div>
       </div>
     </div>
   );

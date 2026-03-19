@@ -15,16 +15,19 @@ const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
   const hasMedia = slide.media && slide.media.length > 0;
 
   return (
-    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-20 pb-16" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div
+      className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24 overflow-y-auto md:overflow-visible"
+      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+    >
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
 
-      <div className={`relative z-10 w-full grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-12 items-center max-w-6xl`}>
+      <div className="relative z-10 w-full grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-12 items-center max-w-6xl">
         <div>
           <MotionBlock motionKey="spotlightFade" delay={0}>
             <motion.span
-              className="vyb-label inline-block opacity-40 mb-[var(--space-kicker-to-title)] border-b pb-2"
+              className="vyb-label inline-block opacity-40 mb-[var(--space-kicker-to-title)] border-b pb-2 clean-hover"
               style={{ borderColor: `${palette.text}33`, color: palette.text }}
-              whileHover={{ opacity: 0.8, x: 4 }}
+              whileHover={{ opacity: 0.8 }}
               transition={{ duration: 0.3 }}
             >
               {slide.section}
@@ -33,35 +36,32 @@ const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
 
           {slide.headline && (
             <MotionBlock motionKey="maskReveal" delay={0.15}>
-              <motion.h2
+              <h2
                 className="vyb-section-title mb-[var(--space-title-to-subtitle)]"
                 style={{ color: palette.primary }}
-                whileHover={{ x: 6 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               >
                 {formatText(slide.headline)}
-              </motion.h2>
+              </h2>
             </MotionBlock>
           )}
 
           {slide.subheadline && (
             <MotionBlock motionKey="diagIn" delay={0.3}>
-              <motion.p
+              <p
                 className="vyb-subtitle opacity-80 mb-[var(--space-subtitle-to-body)]"
                 style={{ color: palette.text }}
-                whileHover={{ opacity: 1 }}
               >
                 {formatText(slide.subheadline)}
-              </motion.p>
+              </p>
             </MotionBlock>
           )}
 
           {slide.body?.map((para, i) => (
             <MotionBlock key={i} motionKey="editorialSweep" delay={0.4 + i * 0.15}>
               <motion.p
-                className="vyb-body opacity-70 max-w-3xl mb-[var(--space-body-to-body)]"
+                className="vyb-body opacity-70 max-w-3xl mb-[var(--space-body-to-body)] clean-hover"
                 style={{ color: palette.text }}
-                whileHover={{ opacity: 1, x: 3 }}
+                whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.25 }}
               >
                 {formatText(para)}

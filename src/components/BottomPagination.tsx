@@ -12,7 +12,8 @@ const BottomPagination = ({ activeId, palette, progress }: BottomPaginationProps
 
   return (
     <div
-      className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-[150] flex items-end gap-2 md:gap-3 pointer-events-none pb-[env(safe-area-inset-bottom)]"
+      className="fixed bottom-7 left-8 md:bottom-7 md:left-8 flex items-center gap-2.5 pointer-events-none pb-[env(safe-area-inset-bottom)]"
+      style={{ zIndex: 'var(--z-chrome)' }}
       role="status"
       aria-live="polite"
       aria-label={`Slide ${activeIndex} of ${SLIDES.length}`}

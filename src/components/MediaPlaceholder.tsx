@@ -141,7 +141,8 @@ const MediaPlaceholder = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-3xl flex items-center justify-center p-8"
+            className="fixed inset-0 bg-black/95 backdrop-blur-3xl flex items-center justify-center p-8"
+            style={{ zIndex: 9999 }}
             onClick={() => setIsFullscreen(false)}
           >
             <button

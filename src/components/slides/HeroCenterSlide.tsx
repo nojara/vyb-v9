@@ -17,7 +17,7 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
   const mouse = useMouseParallax(containerRef, 30);
 
   return (
-    <div ref={containerRef} className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-8 pt-20 pb-16" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div ref={containerRef} className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-8 pt-24 pb-24 no-glitch" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
 
       <div className="relative z-10">

@@ -690,8 +690,20 @@
 .slide-copy,
 .copy-zone {
   position: relative;
-  z-index: 6;
+  z-index: var(--z-text);
   max-width: min(72ch, 100%);
+}
+
+.slide-content-safe {
+  position: relative;
+  z-index: var(--z-text);
+  padding: clamp(80px, 10vh, 140px) clamp(20px, 6vw, 80px) clamp(110px, 14vh, 160px);
+  max-width: 100%;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .bottom-text {
@@ -700,7 +712,7 @@
   right: clamp(20px, 6vw, 80px);
   bottom: clamp(84px, 10vh, 128px);
   max-width: 72ch;
-  z-index: 6;
+  z-index: var(--z-text);
 }
 
 @media (max-width: 767px) {

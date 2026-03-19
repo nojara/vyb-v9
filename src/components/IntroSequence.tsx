@@ -14,7 +14,7 @@ const ScrollPulse = () => (
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 1.6, duration: 0.8, ease }}
-    className="absolute bottom-10 md:bottom-14 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+    className="flex flex-col items-center gap-3"
     style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
   >
     <motion.div

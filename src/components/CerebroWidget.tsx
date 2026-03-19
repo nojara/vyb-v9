@@ -202,7 +202,7 @@ const CerebroWidget = ({ activeContext, textColor }: CerebroWidgetProps) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed z-[149] flex flex-col overflow-hidden
+            className="fixed flex flex-col overflow-hidden
               inset-x-0 bottom-0 rounded-t-2xl h-[70svh]
               md:inset-x-auto md:top-0 md:right-0 md:bottom-0 md:h-auto md:w-[33vw] md:max-w-[520px] md:min-w-[380px] md:rounded-none md:rounded-l-2xl
               border-t-[2px] md:border-t-0 md:border-l-[2px]"
@@ -210,6 +210,7 @@ const CerebroWidget = ({ activeContext, textColor }: CerebroWidgetProps) => {
               backgroundColor: bgc, color: tc, borderColor: tc,
               boxShadow: isDark ? '0 -8px 40px rgba(0,0,0,0.6)' : '0 -8px 40px rgba(0,0,0,0.15)',
               paddingBottom: 'env(safe-area-inset-bottom)',
+              zIndex: 'var(--z-chrome)',
             }}
             initial={{ y: '100%', opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

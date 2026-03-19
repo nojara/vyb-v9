@@ -34,35 +34,17 @@ const BottomPagination = ({ activeId, palette, progress }: BottomPaginationProps
         </motion.span>
       </AnimatePresence>
 
-      <div className="flex flex-col gap-1 mb-0.5">
-        {/* Progress bar */}
-        <div
-          className="w-8 md:w-12 h-[1.5px] overflow-hidden rounded-full"
-          style={{ backgroundColor: `${palette.text}22` }}
-          role="progressbar"
-          aria-valuenow={Math.round(progress * 100)}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-label="Presentation progress"
-        >
-          <motion.div
-            className="h-full rounded-full"
-            style={{ backgroundColor: palette.primary }}
-            animate={{ scaleX: progress }}
-            transition={{ duration: 0.3 }}
-            initial={{ scaleX: 0, transformOrigin: 'left' }}
-          />
-        </div>
+      {/* Separator */}
+      <div className="w-9 h-px" style={{ backgroundColor: 'rgba(255,255,255,0.12)' }} aria-hidden="true" />
 
-        {/* Total */}
-        <span
-          className="font-mono opacity-30 text-[7px] md:text-[8px] tracking-widest uppercase"
-          style={{ color: palette.text }}
-          aria-hidden="true"
-        >
-          {SLIDES.length}
-        </span>
-      </div>
+      {/* Total */}
+      <span
+        className="font-mono text-[11px] tabular-nums"
+        style={{ color: 'rgba(255,255,255,0.18)', letterSpacing: '0.14em' }}
+        aria-hidden="true"
+      >
+        {String(SLIDES.length).padStart(2, '0')}
+      </span>
     </div>
   );
 };

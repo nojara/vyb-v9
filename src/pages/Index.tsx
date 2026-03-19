@@ -96,7 +96,8 @@ const MainExperience = () => {
       {/* Vertical snap-scroll container */}
       <div
         ref={scrollRef}
-        className="fixed inset-0 flex flex-col overflow-y-auto overflow-x-hidden snap-y snap-mandatory z-[1]"
+        className="fixed inset-0 flex flex-col overflow-y-auto overflow-x-hidden snap-y snap-mandatory"
+        style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', zIndex: 1 }}
         style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
         role="region"
         aria-label="Presentation slides"

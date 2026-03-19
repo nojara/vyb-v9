@@ -12,7 +12,8 @@ const TransitionFlash = ({ activeId }: TransitionFlashProps) => (
   <AnimatePresence mode="wait">
     <motion.div
       key={activeId}
-      className="fixed inset-0 bg-white/30 z-[9999] pointer-events-none"
+      className="fixed inset-0 bg-white/30 pointer-events-none"
+      style={{ zIndex: 'var(--z-chrome)' }}
       initial={{ opacity: 0.25 }}
       animate={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}

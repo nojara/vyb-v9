@@ -979,12 +979,12 @@
 
 .content-layer {
   position: relative;
-  z-index: 6;
+  z-index: var(--z-text);
 }
 
 .ui-layer {
   position: relative;
-  z-index: 10;
+  z-index: var(--z-chrome);
 }
 
 .dim-overlay::after {

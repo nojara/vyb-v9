@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
+import DimLayer from '@/components/DimLayer';
 import VideoEmbed from '@/components/VideoEmbed';
 import MediaPlaceholder from '@/components/MediaPlaceholder';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
@@ -13,13 +14,14 @@ const PortraitSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
   const { lang } = useLanguage();
   const { palette } = slide;
   const hasMedia = slide.media && slide.media.length > 0;
+  const hasBg = !!(slide.bgImage || slide.bgVideo);
 
   return (
     <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
+      {hasBg && <DimLayer opacity={0.45} />}
 
       <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
-        {/* Text column */}
         <div>
           <MotionBlock motionKey="spotlightFade" delay={0}>
             <motion.span
@@ -33,20 +35,18 @@ const PortraitSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
 
           {slide.headline && (
             <MotionBlock motionKey="heroLift" delay={0.15}>
-              <motion.h2
+              <h2
                 className="vyb-section-title mb-[var(--space-title-to-subtitle)]"
-                style={{ color: palette.primary }}
-                whileHover={{ x: 6 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                style={{ color: palette.primary, maxWidth: 'var(--mw-title)' }}
               >
                 {formatText(slide.headline)}
-              </motion.h2>
+              </h2>
             </MotionBlock>
           )}
 
           {slide.subheadline && (
             <MotionBlock motionKey="blurResolve" delay={0.3}>
-              <p className="vyb-subtitle opacity-70 mb-[var(--space-subtitle-to-body)] vyb-ar" style={{ color: palette.text }}>
+              <p className="vyb-subtitle opacity-70 mb-[var(--space-subtitle-to-body)]" style={{ color: palette.text }}>
                 {slide.subheadline}
               </p>
             </MotionBlock>
@@ -55,8 +55,8 @@ const PortraitSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
           {slide.body?.map((para, i) => (
             <MotionBlock key={i} motionKey="editorialSweep" delay={0.4 + i * 0.15}>
               <motion.p
-                className="vyb-body opacity-70 max-w-xl mb-[var(--space-body-to-body)]"
-                style={{ color: palette.text }}
+                className="vyb-body opacity-70 mb-[var(--space-body-to-body)]"
+                style={{ color: palette.text, maxWidth: 'var(--mw-body)' }}
                 whileHover={{ opacity: 1, x: 3 }}
                 transition={{ duration: 0.25 }}
               >
@@ -66,7 +66,6 @@ const PortraitSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
           ))}
         </div>
 
-        {/* Media column */}
         <div className="hidden md:flex flex-col items-center md:items-end gap-6">
           {slide.image && (
             <MotionBlock motionKey="portraitFade" delay={0.3}>

@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
+import DimLayer from '@/components/DimLayer';
 import VideoEmbed from '@/components/VideoEmbed';
 import MediaPlaceholder from '@/components/MediaPlaceholder';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
@@ -13,6 +14,7 @@ const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
   const { lang } = useLanguage();
   const { palette } = slide;
   const hasMedia = slide.media && slide.media.length > 0;
+  const hasBg = !!(slide.bgImage || slide.bgVideo);
 
   return (
     <div
@@ -20,6 +22,7 @@ const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
     >
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
+      {hasBg && <DimLayer opacity={0.45} />}
 
       <div className="relative z-10 w-full grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-12 items-center max-w-6xl">
         <div>
@@ -38,7 +41,7 @@ const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
             <MotionBlock motionKey="maskReveal" delay={0.15}>
               <h2
                 className="vyb-section-title mb-[var(--space-title-to-subtitle)]"
-                style={{ color: palette.primary }}
+                style={{ color: palette.primary, maxWidth: 'var(--mw-title)' }}
               >
                 {formatText(slide.headline)}
               </h2>
@@ -59,8 +62,8 @@ const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
           {slide.body?.map((para, i) => (
             <MotionBlock key={i} motionKey="editorialSweep" delay={0.4 + i * 0.15}>
               <motion.p
-                className="vyb-body opacity-70 max-w-3xl mb-[var(--space-body-to-body)] clean-hover"
-                style={{ color: palette.text }}
+                className="vyb-body opacity-70 mb-[var(--space-body-to-body)] clean-hover"
+                style={{ color: palette.text, maxWidth: 'var(--mw-body)' }}
                 whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.25 }}
               >

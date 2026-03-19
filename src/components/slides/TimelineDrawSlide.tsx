@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
+import DimLayer from '@/components/DimLayer';
 import MediaPlaceholder from '@/components/MediaPlaceholder';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
 import { useLanguage } from '@/context/LanguageContext';
@@ -11,10 +12,13 @@ const TimelineDrawSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; i
   const slide = useTranslatedSlide(rawSlide);
   const { lang } = useLanguage();
   const { palette } = slide;
+  const hasBg = !!(slide.bgImage || slide.bgVideo);
 
   return (
     <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24 overflow-y-auto md:overflow-visible" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
+      {hasBg && <DimLayer opacity={0.45} />}
+
       <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-start">
         <div className="max-w-3xl">
           <MotionBlock motionKey="spotlightFade" delay={0}>
@@ -25,14 +29,12 @@ const TimelineDrawSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; i
 
           {slide.headline && (
             <MotionBlock motionKey="heroLift" delay={0.1}>
-              <motion.h2
+              <h2
                 className="vyb-section-title mb-2"
-                style={{ color: palette.primary }}
-                whileHover={{ x: 4 }}
-                transition={{ duration: 0.3 }}
+                style={{ color: palette.primary, maxWidth: 'var(--mw-title)' }}
               >
                 {formatText(slide.headline)}
-              </motion.h2>
+              </h2>
             </MotionBlock>
           )}
 
@@ -53,11 +55,11 @@ const TimelineDrawSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; i
                   whileHover={{ scale: 1.8 }}
                   transition={{ duration: 0.2 }}
                 />
-                <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.25 }}>
+                <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.25 }} className="clean-hover">
                   <span className="vyb-label opacity-60 block mb-1" style={{ color: palette.primary }}>
                     {entry.time}
                   </span>
-                  <h3 className="vyb-body-lg font-[var(--fw-body-strong)] mb-2" style={{ color: palette.text }}>
+                  <h3 className="vyb-body-lg font-semibold mb-2" style={{ color: palette.text }}>
                     {entry.title}
                   </h3>
                   <p className="vyb-body-sm opacity-60 max-w-2xl" style={{ color: palette.text }}>
@@ -69,7 +71,6 @@ const TimelineDrawSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; i
           </div>
         </div>
 
-        {/* Side media placeholder */}
         <div className="hidden md:flex flex-col items-center">
           <MediaPlaceholder
             style="portrait"

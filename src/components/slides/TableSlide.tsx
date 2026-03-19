@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
+import DimLayer from '@/components/DimLayer';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
 import { useLanguage } from '@/context/LanguageContext';
 import { formatText } from '@/utils/formatText';
@@ -13,17 +14,18 @@ const TableSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index: n
   const { palette } = slide;
   const tableRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(tableRef, { once: true, margin: '-10%' });
+  const hasBg = !!(slide.bgImage || slide.bgVideo);
 
-  // Detect summary rows (TOTAL lines)
   const isSummaryRow = (row: string[]) =>
     row[0]?.toUpperCase().startsWith('TOTAL') || row[0]?.toUpperCase().startsWith('SEASON');
 
   return (
     <div
-      className="relative w-full h-full flex items-center px-4 md:px-24 pt-20 pb-16 overflow-y-auto md:overflow-visible"
+      className="relative w-full h-full flex items-center px-4 md:px-24 pt-24 pb-24 overflow-y-auto md:overflow-visible"
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
     >
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
+      {hasBg && <DimLayer opacity={0.4} />}
 
       <div ref={tableRef} className="relative z-10 w-full max-w-6xl">
         {slide.headline && (
@@ -44,7 +46,7 @@ const TableSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index: n
 
         {slide.body?.map((para, i) => (
           <MotionBlock key={i} motionKey="editorialSweep" delay={0.15 + i * 0.1}>
-            <p className="vyb-body opacity-60 max-w-3xl mb-6" style={{ color: palette.text }}>
+            <p className="vyb-body opacity-60 mb-6" style={{ color: palette.text, maxWidth: 'var(--mw-body)' }}>
               {formatText(para)}
             </p>
           </MotionBlock>
@@ -69,7 +71,7 @@ const TableSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index: n
               ))}
             </motion.div>
 
-            {/* Data rows as cards */}
+            {/* Data rows as glass info pockets */}
             {slide.tableData.rows.map((row, ri) => {
               const isSummary = isSummaryRow(row);
               return (
@@ -78,20 +80,18 @@ const TableSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index: n
                   initial={{ opacity: 0, x: -12 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.25 + ri * 0.06 }}
-                  className={`grid gap-2 md:gap-4 px-3 md:px-5 py-2.5 md:py-3 rounded-xl border transition-colors duration-300 ${
-                    isSummary ? 'border-opacity-40' : 'hover:border-opacity-30'
+                  className={`grid gap-2 md:gap-4 px-3 md:px-5 py-2.5 md:py-3 rounded-xl clean-hover ${
+                    isSummary ? 'glass-card-d2' : 'glass-card-d1'
                   }`}
                   style={{
                     gridTemplateColumns: `1fr ${row.length > 2 ? '60px' : '80px'} ${row.length > 2 ? '1fr' : ''}`,
-                    borderColor: isSummary ? `${palette.primary}40` : `${palette.primary}12`,
-                    background: isSummary ? `${palette.primary}08` : `${palette.primary}03`,
                   }}
                 >
                   {row.map((cell, ci) => (
                     <span
                       key={ci}
-                      className={`${ci === 0 ? 'vyb-body-sm' : ci === 1 ? 'vyb-metric text-[var(--fs-body)] font-[var(--fw-metric)]' : 'vyb-body-sm opacity-60'} ${
-                        isSummary && ci === 0 ? 'font-[var(--fw-body-strong)]' : ''
+                      className={`${ci === 0 ? 'vyb-body-sm' : ci === 1 ? 'vyb-metric text-[var(--fs-body)] font-bold' : 'vyb-body-sm opacity-60'} ${
+                        isSummary && ci === 0 ? 'font-semibold' : ''
                       }`}
                       style={{
                         color: ci === 1 ? palette.primary : palette.text,

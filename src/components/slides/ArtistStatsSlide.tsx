@@ -1,8 +1,9 @@
-import { motion, useInView } from 'motion/react';
-import { useRef, useEffect, useState } from 'react';
+import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
+import DimLayer from '@/components/DimLayer';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
 import { useLanguage } from '@/context/LanguageContext';
 import { useSlideActive } from '@/context/SlideActiveContext';
@@ -55,10 +56,13 @@ const ArtistStatsSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; in
   const { lang } = useLanguage();
   const { palette } = slide;
   const isActive = useSlideActive();
+  const hasBg = !!(slide.bgImage || slide.bgVideo);
 
   return (
-    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-20 pb-16 overflow-y-auto md:overflow-visible" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24 overflow-y-auto md:overflow-visible" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
+      {hasBg && <DimLayer opacity={0.45} />}
+
       <div className="relative z-10 w-full max-w-5xl mx-auto">
         {slide.headline && (
           <MotionBlock motionKey="heroLift" delay={0}>
@@ -81,12 +85,8 @@ const ArtistStatsSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; in
           {(slide.stats || []).map((stat, i) => (
             <MotionBlock key={i} motionKey="metricCountIn" delay={0.2 + i * 0.15}>
               <motion.div
-                className="text-center p-4 md:p-6 rounded-[var(--vyb-radius-card)] border backdrop-blur-xl"
-                style={{
-                  borderColor: `${palette.primary}15`,
-                  background: 'var(--vyb-glass-dark)',
-                }}
-                whileHover={{ scale: 1.06, borderColor: `${palette.primary}40`, y: -3 }}
+                className="glass-card-d2 text-center"
+                whileHover={{ scale: 1.06, y: -3 }}
                 transition={{ duration: 0.3 }}
               >
                 <span className="vyb-metric block" style={{ color: palette.primary }}>
@@ -102,13 +102,7 @@ const ArtistStatsSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; in
 
         {/* Platform distribution chart */}
         <MotionBlock motionKey="cardRise" delay={0.7}>
-          <motion.div
-            className="rounded-[var(--vyb-radius-card)] border p-5 md:p-8 backdrop-blur-xl"
-            style={{
-              background: 'var(--vyb-glass-dark)',
-              borderColor: 'var(--vyb-border-light)',
-            }}
-          >
+          <div className="glass-card-d2">
             <p className="vyb-label opacity-40 mb-4" style={{ color: palette.text }}>
               PLATFORM DISTRIBUTION
             </p>
@@ -133,7 +127,6 @@ const ArtistStatsSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; in
               </ResponsiveContainer>
             </div>
 
-            {/* Platform legend with icons */}
             <div className="flex justify-center gap-6 mt-4">
               {PLATFORM_DATA.map((p) => (
                 <div key={p.name} className="flex items-center gap-2 opacity-60" style={{ color: p.color }}>
@@ -144,7 +137,7 @@ const ArtistStatsSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; in
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </MotionBlock>
       </div>
     </div>

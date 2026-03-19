@@ -12,7 +12,8 @@ const TopNav = ({ activeId, palette }: TopNavProps) => {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-[200] pointer-events-none flex items-center justify-center px-2 md:px-4 mt-4 md:mt-6 pt-[env(safe-area-inset-top)]"
+      className="fixed top-0 left-0 right-0 pointer-events-none flex items-center justify-center px-2 md:px-4 mt-4 md:mt-6 pt-[env(safe-area-inset-top)]"
+      style={{ zIndex: 'var(--z-chrome)' }}
       role="banner"
     >
       <nav

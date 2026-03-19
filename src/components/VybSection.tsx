@@ -19,8 +19,8 @@ const FullscreenVideoModal = ({ src, startTime, onClose }: { src: string; startT
   return (
     <motion.div 
       initial={{ opacity: 0, scale: 1.1 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.1 }}
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-6 md:p-12"
-      style={{ backgroundColor: 'rgba(0,0,0,0.98)', backdropFilter: 'blur(100px)' }}
+      className="fixed inset-0 flex items-center justify-center p-6 md:p-12"
+      style={{ backgroundColor: 'rgba(0,0,0,0.98)', backdropFilter: 'blur(100px)', zIndex: 9999 }}
     >
       <motion.button 
         initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }}

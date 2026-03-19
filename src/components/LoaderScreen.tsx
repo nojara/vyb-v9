@@ -33,8 +33,8 @@ const LoaderScreen = ({ onStart }: LoaderScreenProps) => {
     <motion.div
       exit={{ y: '-100%', opacity: 0, scale: 0.95, filter: 'blur(20px)' }}
       transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: '#000' }}
+      className="fixed inset-0 flex items-center justify-center overflow-hidden"
+      style={{ backgroundColor: '#000', zIndex: 9998 }}
     >
       <div className="relative w-full h-full" style={{ backgroundColor: '#000' }}>
         <video

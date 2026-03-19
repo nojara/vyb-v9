@@ -84,7 +84,8 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
     <motion.div
       exit={{ opacity: 0, scale: 0.97, filter: 'blur(14px)' }}
       transition={{ duration: 0.9, ease }}
-      className="fixed inset-0 z-[300] overflow-hidden bg-background"
+      className="fixed inset-0 overflow-hidden bg-background"
+      style={{ zIndex: 9999 }}
     >
       {/* Cinematic layers */}
       <div className="texture-overlay" aria-hidden="true" />
@@ -102,8 +103,8 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
       {/* Scroll container */}
       <div
         ref={scrollRef}
-        className="relative z-[1] w-full h-full overflow-y-auto snap-y snap-mandatory"
-        style={{ scrollbarWidth: 'none' }}
+        className="relative w-full h-full overflow-y-auto snap-y snap-mandatory"
+        style={{ scrollbarWidth: 'none', zIndex: 1 }}
       >
         {/* ─── Section 0: Logos ─── */}
         <section

@@ -155,7 +155,6 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
               />
             </motion.div>
           </div>
-          </motion.div>
 
           <ScrollPulse />
         </section>

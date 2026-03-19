@@ -8,7 +8,6 @@ interface IntroSequenceProps {
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-/* ── Pulsing scroll indicator with neural brand-gradient ── */
 const ScrollPulse = () => (
   <motion.div
     initial={{ opacity: 0, y: 10 }}
@@ -22,7 +21,6 @@ const ScrollPulse = () => (
       transition={{ repeat: Infinity, duration: 2.6, ease: 'easeInOut' }}
       className="relative w-11 h-11 md:w-14 md:h-14 flex items-center justify-center"
     >
-      {/* Conic gradient ring using brand tokens */}
       <div
         className="absolute inset-0 rounded-full"
         style={{
@@ -74,7 +72,7 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
   }, []);
 
   useEffect(() => {
-    if (activeSection === 3) {
+    if (activeSection === 2) {
       const t = setTimeout(onComplete, 2400);
       return () => clearTimeout(t);
     }
@@ -87,11 +85,9 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
       className="fixed inset-0 overflow-hidden bg-background"
       style={{ zIndex: 9999 }}
     >
-      {/* Cinematic layers */}
       <div className="texture-overlay" aria-hidden="true" />
       <div className="cinematic-vignette" aria-hidden="true" />
 
-      {/* Ambient radial glow behind content */}
       <div
         className="fixed inset-0 pointer-events-none z-0"
         aria-hidden="true"
@@ -100,74 +96,39 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
         }}
       />
 
-      {/* Scroll container */}
       <div
         ref={scrollRef}
         className="relative w-full h-full overflow-y-auto snap-y snap-mandatory"
         style={{ scrollbarWidth: 'none', zIndex: 1 }}
       >
-        {/* ─── Section 0: Logos ─── */}
+        {/* ─── Section 0: Elevate Logo ─── */}
         <section
           data-intro-section="0"
           className="relative w-full flex flex-col items-center justify-center gap-10 md:gap-14 snap-start snap-always"
           style={{ height: '100svh' }}
         >
-          <div className="flex items-center gap-10 md:gap-16">
-            {/* Elevate */}
-            <motion.div
-              initial={{ opacity: 0, x: -50, scale: 0.85 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 1.3, delay: 0.35, ease }}
-              className="relative"
-            >
-              <img
-                src="https://elevate-it.com/wp-content/uploads/2024/10/Elvete-logo-2-2048x333.png"
-                alt="Elevate"
-                className="w-[120px] md:w-[220px] h-auto object-contain"
-                style={{ filter: 'brightness(0) invert(1)' }}
-              />
-              <div
-                className="absolute -inset-4 -z-10 rounded-full opacity-20 blur-2xl"
-                style={{ backgroundColor: 'var(--vyb-cyan)' }}
-              />
-            </motion.div>
-
-            {/* Divider */}
-            <motion.div
-              initial={{ scaleY: 0, opacity: 0 }}
-              animate={{ scaleY: 1, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.8, ease }}
-              className="w-px h-10 md:h-14 origin-center"
-              style={{
-                background: `linear-gradient(to bottom, transparent, var(--vyb-teal), transparent)`,
-                opacity: 0.35,
-              }}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.3, delay: 0.35, ease }}
+            className="relative"
+          >
+            <img
+              src="https://elevate-it.com/wp-content/uploads/2024/10/Elvete-logo-2-2048x333.png"
+              alt="Elevate"
+              className="w-[160px] md:w-[280px] h-auto object-contain"
+              style={{ filter: 'brightness(0) invert(1)' }}
             />
-
-            {/* Nojara */}
-            <motion.div
-              initial={{ opacity: 0, x: 50, scale: 0.85 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 1.3, delay: 0.5, ease }}
-              className="relative"
-            >
-              <img
-                src="https://static.wixstatic.com/media/227dff_d4d02dbb309a4982990c4a17aadfe4b2~mv2.png"
-                alt="Nojara"
-                className="w-[120px] md:w-[220px] h-auto object-contain"
-                style={{ filter: 'brightness(0) invert(1)' }}
-              />
-              <div
-                className="absolute -inset-4 -z-10 rounded-full opacity-20 blur-2xl"
-                style={{ backgroundColor: 'var(--vyb-teal)' }}
-              />
-            </motion.div>
-          </div>
+            <div
+              className="absolute -inset-4 -z-10 rounded-full opacity-20 blur-2xl"
+              style={{ backgroundColor: 'var(--vyb-cyan)' }}
+            />
+          </motion.div>
 
           <ScrollPulse />
         </section>
 
-        {/* ─── Section 1: "presents" ─── */}
+        {/* ─── Section 1: "Presents" ─── */}
         <section
           data-intro-section="1"
           className="relative w-full flex items-center justify-center snap-start snap-always"
@@ -180,23 +141,22 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
             transition={{ duration: 1, ease }}
             className="text-center"
           >
-            <span
-              className="font-mono font-semibold tracking-[0.35em] uppercase"
+            <h2
+              className="font-display font-bold tracking-[0.2em] uppercase"
               style={{
                 color: 'var(--vyb-cyan)',
-                fontSize: 'clamp(0.75rem, 1.4vw, 1.1rem)',
-                textShadow: '0 0 30px rgba(41,200,232,0.25)',
+                fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+                textShadow: '0 0 40px rgba(41,200,232,0.3)',
               }}
             >
               {lang === 'ar' ? 'تقدّم' : 'PRESENTS'}
-            </span>
-            {/* Decorative line */}
+            </h2>
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3, ease }}
-              className="mx-auto mt-4 h-px w-16 md:w-24 origin-center"
+              className="mx-auto mt-5 h-px w-20 md:w-32 origin-center"
               style={{
                 background: `linear-gradient(90deg, transparent, var(--vyb-cyan), transparent)`,
                 opacity: 0.4,
@@ -205,10 +165,10 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
           </motion.div>
         </section>
 
-        {/* ─── Section 2: Vyb Sessions ─── */}
+        {/* ─── Section 2: Vyb Sessions + Brought to you by Mobily ─── */}
         <section
           data-intro-section="2"
-          className="relative w-full flex items-center justify-center snap-start snap-always px-5"
+          className="relative w-full flex flex-col items-center justify-center gap-8 md:gap-10 snap-start snap-always px-5"
           style={{ height: '100svh' }}
         >
           <motion.div
@@ -218,7 +178,6 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
             transition={{ duration: 1.3, ease }}
             className="text-center relative"
           >
-            {/* Background glow behind title */}
             <div
               className="absolute inset-0 -z-10 blur-3xl opacity-15"
               style={{
@@ -234,43 +193,39 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
               <span>Sessions</span>
             </h1>
           </motion.div>
-        </section>
 
-        {/* ─── Section 3: Brought to you by Mobily ─── */}
-        <section
-          data-intro-section="3"
-          className="relative w-full flex flex-col items-center justify-center gap-6 md:gap-8 snap-start snap-always"
-          style={{ height: '100svh' }}
-        >
-          <motion.span
+          <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-20%' }}
-            transition={{ duration: 0.9, ease }}
-            className="vyb-label tracking-[0.2em]"
-            style={{ color: 'hsl(var(--muted-foreground))' }}
+            transition={{ duration: 0.9, delay: 0.3, ease }}
+            className="flex flex-col items-center gap-5 md:gap-6"
           >
-            {lang === 'ar' ? 'مقدّمة من' : 'BROUGHT TO YOU BY'}
-          </motion.span>
+            <span
+              className="vyb-label tracking-[0.2em]"
+              style={{ color: 'hsl(var(--muted-foreground))' }}
+            >
+              {lang === 'ar' ? 'مقدّمة من' : 'BROUGHT TO YOU BY'}
+            </span>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.82, y: 24 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true, margin: '-20%' }}
-            transition={{ duration: 1.1, delay: 0.2, ease }}
-            className="relative"
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Mobily_Logo.svg/960px-Mobily_Logo.svg.png"
-              alt="Mobily"
-              className="h-14 md:h-20 lg:h-24 w-auto object-contain"
-              style={{ filter: 'brightness(0) invert(1)' }}
-            />
-            {/* Glow under Mobily */}
-            <div
-              className="absolute -inset-6 -z-10 rounded-full opacity-15 blur-3xl"
-              style={{ backgroundColor: 'var(--vyb-yellow)' }}
-            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.82 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.1, delay: 0.5, ease }}
+              className="relative"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Mobily_Logo.svg/960px-Mobily_Logo.svg.png"
+                alt="Mobily"
+                className="h-12 md:h-18 lg:h-22 w-auto object-contain"
+                style={{ filter: 'brightness(0) invert(1)' }}
+              />
+              <div
+                className="absolute -inset-6 -z-10 rounded-full opacity-15 blur-3xl"
+                style={{ backgroundColor: 'var(--vyb-yellow)' }}
+              />
+            </motion.div>
           </motion.div>
         </section>
       </div>

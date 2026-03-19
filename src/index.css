@@ -730,19 +730,22 @@
 
 .slide-number,
 .vyb-slide-number {
-  position: absolute;
-  left: clamp(16px, 3vw, 28px);
-  bottom: clamp(18px, 3vw, 28px);
-  z-index: 8;
+  position: fixed;
+  left: 32px;
+  bottom: 28px;
+  z-index: var(--z-chrome);
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
   font-family: var(--font-mono);
-  font-size: var(--fs-slide-number);
+  font-size: 11px;
   line-height: 1;
-  letter-spacing: var(--ls-label);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 
-  color: rgba(255, 255, 255, 0.58);
-  opacity: 1;
+  color: rgba(255, 255, 255, 0.35);
   pointer-events: none;
 }
 

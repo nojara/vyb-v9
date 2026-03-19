@@ -190,8 +190,8 @@ const CerebroWidget = ({ activeContext, textColor }: CerebroWidgetProps) => {
       {/* FAB — mobile: smaller, respects safe area */}
       <motion.button
         onClick={() => setIsOpen(v => !v)}
-        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[160] border-[2px] rounded-full px-3 py-2 md:px-5 md:py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest shadow-2xl flex items-center gap-1.5 md:gap-2 transition-colors duration-700"
-        style={{ color: tc, borderColor: tc, backgroundColor: bgc, fontFamily: 'var(--f-mono)', marginBottom: 'env(safe-area-inset-bottom)' }}
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 border-[2px] rounded-full px-3 py-2 md:px-5 md:py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest shadow-2xl flex items-center gap-1.5 md:gap-2 transition-colors duration-700"
+        style={{ color: tc, borderColor: tc, backgroundColor: bgc, fontFamily: 'var(--f-mono)', marginBottom: 'env(safe-area-inset-bottom)', zIndex: 'var(--z-chrome)' }}
         whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
       >
         <PulseRings active={isOpen && isConnected} color={isConnected ? '#A9ED3D' : tc} />

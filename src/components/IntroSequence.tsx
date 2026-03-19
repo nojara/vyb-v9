@@ -105,7 +105,6 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
         ref={scrollRef}
         className="relative w-full h-full overflow-y-auto snap-y snap-mandatory"
         style={{ scrollbarWidth: 'none', zIndex: 1 }}
-        style={{ scrollbarWidth: 'none' }}
       >
         {/* ─── Section 0: Logos ─── */}
         <section

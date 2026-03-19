@@ -35,7 +35,6 @@ const LoaderScreen = ({ onStart }: LoaderScreenProps) => {
       transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
       className="fixed inset-0 flex items-center justify-center overflow-hidden"
       style={{ backgroundColor: '#000', zIndex: 9998 }}
-      style={{ backgroundColor: '#000' }}
     >
       <div className="relative w-full h-full" style={{ backgroundColor: '#000' }}>
         <video

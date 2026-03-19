@@ -15,7 +15,7 @@ const PortraitSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
   const hasMedia = slide.media && slide.media.length > 0;
 
   return (
-    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-20 pb-16" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
 
       <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">

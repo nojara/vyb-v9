@@ -16,7 +16,7 @@ const EditorialSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide;
   const hasMedia = slide.media && slide.media.length > 0;
 
   return (
-    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-20 pb-16 overflow-y-auto md:overflow-visible" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24 overflow-y-auto md:overflow-visible" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
 
       <div className="relative z-10 w-full max-w-6xl">

@@ -2,18 +2,21 @@ import { motion } from 'motion/react';
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
+import DimLayer from '@/components/DimLayer';
 import VideoEmbed from '@/components/VideoEmbed';
 import MediaPlaceholder from '@/components/MediaPlaceholder';
-import { GlassCard } from '@/components/ui/GlassCard';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
 import { useLanguage } from '@/context/LanguageContext';
 import { formatText } from '@/utils/formatText';
+
+const ACCENT_COLORS = ['var(--vyb-yellow)', 'var(--vyb-teal)', 'var(--vyb-blue)', 'var(--vyb-coral)'];
 
 const CardGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index: number }) => {
   const slide = useTranslatedSlide(rawSlide);
   const { lang } = useLanguage();
   const { palette } = slide;
   const cols = (slide.pillars?.length || 4) >= 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-2 lg:grid-cols-3';
+  const hasBg = !!(slide.bgImage || slide.bgVideo);
 
   return (
     <div
@@ -21,6 +24,8 @@ const CardGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
     >
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
+      {hasBg && <DimLayer opacity={0.4} />}
+
       <div className="relative z-10 w-full max-w-6xl">
         <MotionBlock motionKey="spotlightFade" delay={0}>
           <span className="vyb-label inline-block opacity-40 mb-[var(--space-kicker-to-title)]" style={{ color: palette.text }}>
@@ -30,7 +35,7 @@ const CardGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index
 
         {slide.headline && (
           <MotionBlock motionKey="maskReveal" delay={0.1}>
-            <h2 className="vyb-section-title mb-8" style={{ color: palette.primary }}>
+            <h2 className="vyb-section-title mb-8" style={{ color: palette.primary, maxWidth: 'var(--mw-title)' }}>
               {formatText(slide.headline)}
             </h2>
           </MotionBlock>
@@ -42,21 +47,21 @@ const CardGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index
               {slide.pillars?.map((pillar, i) => (
                 <MotionBlock key={i} motionKey="cardRise" delay={0.2 + i * 0.12} custom={i}>
                   <motion.div
-                    whileHover={{
-                      scale: 1.03,
-                      y: -4,
-                    }}
+                    whileHover={{ scale: 1.03, y: -4 }}
                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                     className="will-change-transform clean-hover"
                   >
-                    <GlassCard accentColor={palette.accent}>
-                      <h3 className="vyb-label mb-3 tracking-widest" style={{ color: palette.primary }}>
+                    <div
+                      className="glass-card-d2"
+                      style={{ borderTop: `2px solid ${ACCENT_COLORS[i % ACCENT_COLORS.length]}` }}
+                    >
+                      <h3 className="vyb-label mb-3 tracking-widest" style={{ color: '#FFFFFF', fontWeight: 600 }}>
                         {pillar.title}
                       </h3>
-                      <p className="vyb-body-sm opacity-70 leading-relaxed" style={{ color: palette.text }}>
+                      <p className="vyb-body-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
                         {pillar.text}
                       </p>
-                    </GlassCard>
+                    </div>
                   </motion.div>
                 </MotionBlock>
               ))}
@@ -64,7 +69,7 @@ const CardGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index
 
             {slide.body?.map((para, i) => (
               <MotionBlock key={i} motionKey="paragraphUnfold" delay={0.6 + i * 0.1} className="mt-8">
-                <p className="vyb-body opacity-60 max-w-3xl" style={{ color: palette.text }}>
+                <p className="vyb-body opacity-60" style={{ color: palette.text, maxWidth: 'var(--mw-body)' }}>
                   {formatText(para)}
                 </p>
               </MotionBlock>

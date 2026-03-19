@@ -1,6 +1,7 @@
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
+import DimLayer from '@/components/DimLayer';
 import CountUpMetric from '@/components/CountUpMetric';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
 import { useLanguage } from '@/context/LanguageContext';
@@ -10,13 +11,16 @@ const MetricsGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; in
   const slide = useTranslatedSlide(rawSlide);
   const { lang } = useLanguage();
   const { palette } = slide;
+  const hasBg = !!(slide.bgImage || slide.bgVideo);
 
   return (
     <div
-      className="relative w-full h-full flex items-center px-5 md:px-24 pt-20 pb-16 overflow-y-auto md:overflow-visible"
+      className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24 overflow-y-auto md:overflow-visible"
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
     >
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
+      {hasBg && <DimLayer opacity={0.45} />}
+
       <div className="relative z-10 w-full max-w-6xl">
         {slide.headline && (
           <MotionBlock motionKey="heroLift" delay={0}>

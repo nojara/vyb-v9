@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
+import DimLayer from '@/components/DimLayer';
 import MediaPlaceholder from '@/components/MediaPlaceholder';
 import { useMouseParallax } from '@/hooks/useMouseParallax';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
@@ -15,13 +16,15 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
   const { palette } = slide;
   const containerRef = useRef<HTMLDivElement>(null);
   const mouse = useMouseParallax(containerRef, 30);
+  const hasBg = !!(slide.bgImage || slide.bgVideo);
 
   return (
     <div ref={containerRef} className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-8 pt-24 pb-24 no-glitch" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
+      {hasBg && <DimLayer opacity={0.45} gradient />}
 
       <div className="relative z-10">
-        {/* Floating accent orb — parallax layer 1 */}
+        {/* Floating accent orb */}
         <motion.div
           className="absolute -top-24 -right-32 w-64 h-64 rounded-full pointer-events-none opacity-20 blur-[80px]"
           style={{ backgroundColor: palette.accent }}
@@ -40,11 +43,10 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
           </motion.span>
         </MotionBlock>
 
-        {/* Title — parallax layer 2 */}
         <MotionBlock motionKey="heroLift" delay={0.4}>
           <motion.h1
             className="vyb-hero-title"
-            style={{ color: palette.primary }}
+            style={{ color: palette.primary, maxWidth: 'var(--mw-hero)' }}
             animate={{ x: mouse.x * 0.4, y: mouse.y * 0.3 }}
             transition={{ type: 'spring', stiffness: 80, damping: 40 }}
           >
@@ -52,7 +54,6 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
           </motion.h1>
         </MotionBlock>
 
-        {/* Subtitle — parallax layer 3 (opposite) */}
         {slide.subheadline && (
           <MotionBlock motionKey="blurResolve" delay={0.6} className="mt-[var(--space-title-to-subtitle)]">
             <motion.p
@@ -66,7 +67,6 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
           </MotionBlock>
         )}
 
-        {/* Media placeholder */}
         <div className="mt-10 flex justify-center">
           <MediaPlaceholder
             style="cinematic"

@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
+import DimLayer from '@/components/DimLayer';
 import VideoEmbed from '@/components/VideoEmbed';
 import MediaPlaceholder from '@/components/MediaPlaceholder';
 import { GlassCard } from '@/components/ui/GlassCard';
@@ -9,15 +10,19 @@ import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
 import { useLanguage } from '@/context/LanguageContext';
 import { formatText } from '@/utils/formatText';
 
+const ACCENT_COLORS = ['var(--vyb-yellow)', 'var(--vyb-teal)', 'var(--vyb-blue)', 'var(--vyb-coral)'];
+
 const EditorialSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index: number }) => {
   const slide = useTranslatedSlide(rawSlide);
   const { lang } = useLanguage();
   const { palette } = slide;
   const hasMedia = slide.media && slide.media.length > 0;
+  const hasBg = !!(slide.bgImage || slide.bgVideo);
 
   return (
     <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24 overflow-y-auto md:overflow-visible" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
+      {hasBg && <DimLayer opacity={0.45} />}
 
       <div className="relative z-10 w-full max-w-6xl">
         <MotionBlock motionKey="spotlightFade" delay={0}>
@@ -32,14 +37,12 @@ const EditorialSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide;
 
         {slide.headline && (
           <MotionBlock motionKey="maskReveal" delay={0.1}>
-            <motion.h2
+            <h2
               className="vyb-section-title mb-[var(--space-kicker-to-title)]"
-              style={{ color: palette.primary }}
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              style={{ color: palette.primary, maxWidth: 'var(--mw-title)' }}
             >
               {formatText(slide.headline)}
-            </motion.h2>
+            </h2>
           </MotionBlock>
         )}
 
@@ -55,16 +58,23 @@ const EditorialSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide;
           <div className="grid grid-cols-1 gap-6">
             {slide.pillars?.map((pillar, i) => (
               <MotionBlock key={i} motionKey="cardRise" delay={0.3 + i * 0.15}>
-                <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.3 }}>
-                  <GlassCard className="relative overflow-hidden">
+                <motion.div
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  transition={{ duration: 0.3 }}
+                  className="clean-hover"
+                >
+                  <div
+                    className="glass-card-d2 relative overflow-hidden"
+                    style={{ borderTop: `2px solid ${ACCENT_COLORS[i % ACCENT_COLORS.length]}` }}
+                  >
                     <div className="absolute top-0 left-0 w-1 h-full" style={{ backgroundColor: palette.primary }} />
-                    <h3 className="vyb-body-lg font-[var(--fw-body-strong)] mb-3 pl-4" style={{ color: palette.primary }}>
+                    <h3 className="vyb-body-lg font-semibold mb-3 pl-4" style={{ color: '#FFFFFF' }}>
                       {pillar.title}
                     </h3>
-                    <p className="vyb-body-sm opacity-70 pl-4" style={{ color: palette.text }}>
+                    <p className="vyb-body-sm pl-4" style={{ color: 'rgba(255,255,255,0.75)' }}>
                       {pillar.text}
                     </p>
-                  </GlassCard>
+                  </div>
                 </motion.div>
               </MotionBlock>
             ))}
@@ -91,13 +101,9 @@ const EditorialSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide;
 
         {slide.body?.map((para, i) => (
           <MotionBlock key={i} motionKey="paragraphUnfold" delay={0.6 + i * 0.1}>
-            <motion.p
-              className="vyb-body opacity-60 max-w-3xl"
-              style={{ color: palette.text }}
-              whileHover={{ opacity: 0.9 }}
-            >
+            <p className="vyb-body opacity-60" style={{ color: palette.text, maxWidth: 'var(--mw-body)' }}>
               {formatText(para)}
-            </motion.p>
+            </p>
           </MotionBlock>
         ))}
       </div>

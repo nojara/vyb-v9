@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
+import DimLayer from '@/components/DimLayer';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
 import { useLanguage } from '@/context/LanguageContext';
 import { formatText } from '@/utils/formatText';
@@ -18,10 +19,13 @@ const ArtistGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
   const { lang } = useLanguage();
   const { palette } = slide;
   const artists = slide.artistData || [];
+  const hasBg = !!(slide.bgImage || slide.bgVideo);
 
   return (
-    <div className="relative w-full h-full flex items-start px-4 md:px-24 pt-20 pb-16 overflow-y-auto" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="relative w-full h-full flex items-start px-4 md:px-24 pt-24 pb-24 overflow-y-auto" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
+      {hasBg && <DimLayer opacity={0.45} />}
+
       <div className="relative z-10 w-full max-w-6xl mx-auto">
         <MotionBlock motionKey="spotlightFade" delay={0}>
           <span className="vyb-label inline-block opacity-40 mb-2" style={{ color: palette.text }}>
@@ -49,11 +53,8 @@ const ArtistGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
           {artists.map((artist, i) => (
             <MotionBlock key={artist.name} motionKey="cardRise" delay={0.25 + i * 0.04} custom={i}>
               <motion.div
-                className="rounded-[var(--vyb-radius-card)] border p-3 md:p-4 flex flex-col items-center gap-2 backdrop-blur-md md:backdrop-blur-xl"
-                style={{
-                  background: 'var(--vyb-glass-dark)',
-                  borderColor: 'var(--vyb-border-light)',
-                }}
+                className="glass-card-d2 flex flex-col items-center gap-2"
+                style={{ padding: '12px 16px' }}
                 whileHover={{
                   scale: 1.06,
                   y: -4,
@@ -62,46 +63,39 @@ const ArtistGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
                 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               >
-                {/* Artist name */}
+                {/* Artist initial avatar */}
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center"
+                  style={{
+                    background: 'rgba(255,255,255,0.1)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '14px',
+                    color: '#FFFFFF',
+                  }}
+                >
+                  {artist.name.charAt(0)}
+                </div>
+
                 <span
                   className="vyb-label text-center leading-tight text-[11px] md:text-xs"
-                  style={{ color: palette.text }}
+                  style={{ color: '#FFFFFF', fontWeight: 600 }}
                 >
                   {artist.name}
                 </span>
 
-                {/* Platform icons */}
                 <div className="flex gap-2 mt-1">
                   {artist.tiktok && (
-                    <a
-                      href={artist.tiktok}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="opacity-50 hover:opacity-100 transition-opacity"
-                      style={{ color: palette.text }}
-                    >
+                    <a href={artist.tiktok} target="_blank" rel="noopener noreferrer" className="opacity-50 hover:opacity-100 transition-opacity" style={{ color: palette.text }}>
                       <TikTokIcon size={14} />
                     </a>
                   )}
                   {artist.youtube && (
-                    <a
-                      href={artist.youtube}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="opacity-50 hover:opacity-100 transition-opacity"
-                      style={{ color: palette.text }}
-                    >
+                    <a href={artist.youtube} target="_blank" rel="noopener noreferrer" className="opacity-50 hover:opacity-100 transition-opacity" style={{ color: palette.text }}>
                       <Youtube size={14} />
                     </a>
                   )}
                   {artist.instagram && (
-                    <a
-                      href={artist.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="opacity-50 hover:opacity-100 transition-opacity"
-                      style={{ color: palette.text }}
-                    >
+                    <a href={artist.instagram} target="_blank" rel="noopener noreferrer" className="opacity-50 hover:opacity-100 transition-opacity" style={{ color: palette.text }}>
                       <Instagram size={14} />
                     </a>
                   )}

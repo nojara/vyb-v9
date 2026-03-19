@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ComputedSlide } from '@/data/slides';
 import MotionBlock from '@/components/MotionBlock';
 import SlideBackground from '@/components/SlideBackground';
+import DimLayer from '@/components/DimLayer';
 import MediaPlaceholder from '@/components/MediaPlaceholder';
 import { useMouseParallax } from '@/hooks/useMouseParallax';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
@@ -15,10 +16,22 @@ const ClosingSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index:
   const { palette } = slide;
   const containerRef = useRef<HTMLDivElement>(null);
   const mouse = useMouseParallax(containerRef, 24);
+  const hasBg = !!(slide.bgImage || slide.bgVideo);
 
   return (
     <div ref={containerRef} className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-8 pt-24 pb-24 no-glitch" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
+      {hasBg && <DimLayer opacity={0.52} gradient />}
+
+      {/* Vignette overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          zIndex: 'var(--z-fx)' as any,
+          background: 'radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.55) 100%)',
+        }}
+        aria-hidden="true"
+      />
 
       {/* Parallax glow */}
       <motion.div
@@ -48,7 +61,6 @@ const ClosingSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index:
           </MotionBlock>
         )}
 
-        {/* Media */}
         <div className="mb-8">
           <MediaPlaceholder
             style="cinematic"
@@ -61,7 +73,7 @@ const ClosingSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index:
         </div>
 
         {slide.body?.map((para, i) => (
-          <MotionBlock key={i} motionKey="ctaBreathe" delay={0.7 + i * 0.15}>
+          <MotionBlock key={i} motionKey="ctaBreathe" delay={0.7 + i * 0.5}>
             <motion.p
               className="vyb-label opacity-40 mb-2"
               style={{ color: palette.text }}

@@ -14,7 +14,7 @@ const ScrollPulse = () => (
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 1.6, duration: 0.8, ease }}
-    className="absolute bottom-10 md:bottom-14 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+    className="flex flex-col items-center gap-3"
     style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
   >
     <motion.div
@@ -108,7 +108,7 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
         {/* ─── Section 0: Logos ─── */}
         <section
           data-intro-section="0"
-          className="relative w-full flex flex-col items-center justify-center snap-start snap-always"
+          className="relative w-full flex flex-col items-center justify-center gap-10 md:gap-14 snap-start snap-always"
           style={{ height: '100svh' }}
         >
           <div className="flex items-center gap-10 md:gap-16">
@@ -125,14 +125,13 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
                 className="w-[120px] md:w-[220px] h-auto object-contain"
                 style={{ filter: 'brightness(0) invert(1)' }}
               />
-              {/* Subtle glow under logo */}
               <div
                 className="absolute -inset-4 -z-10 rounded-full opacity-20 blur-2xl"
                 style={{ backgroundColor: 'var(--vyb-cyan)' }}
               />
             </motion.div>
 
-            {/* Divider — subtle brand accent */}
+            {/* Divider */}
             <motion.div
               initial={{ scaleY: 0, opacity: 0 }}
               animate={{ scaleY: 1, opacity: 1 }}

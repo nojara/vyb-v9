@@ -84,7 +84,8 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
     <motion.div
       exit={{ opacity: 0, scale: 0.97, filter: 'blur(14px)' }}
       transition={{ duration: 0.9, ease }}
-      className="fixed inset-0 z-[300] overflow-hidden bg-background"
+      className="fixed inset-0 overflow-hidden bg-background"
+      style={{ zIndex: 9999 }}
     >
       {/* Cinematic layers */}
       <div className="texture-overlay" aria-hidden="true" />

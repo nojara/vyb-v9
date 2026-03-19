@@ -139,6 +139,19 @@
     --dur-fast: 360ms;
     --dur-med: 640ms;
     --dur-slow: 900ms;
+
+    /* === Z-index depth stack === */
+    --z-bg: 0;
+    --z-graphic: 10;
+    --z-fx: 20;
+    --z-card: 30;
+    --z-text: 40;
+    --z-chrome: 50;
+
+    /* === Typography max widths === */
+    --mw-hero: 14ch;
+    --mw-title: 20ch;
+    --mw-body: 52ch;
   }
 
   @media (max-width: 767px) {

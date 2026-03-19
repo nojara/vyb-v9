@@ -762,7 +762,7 @@
   position: absolute;
   right: clamp(16px, 3vw, 32px);
   bottom: clamp(16px, 3vw, 32px);
-  z-index: 9;
+  z-index: var(--z-chrome);
 
   display: inline-flex;
   align-items: center;

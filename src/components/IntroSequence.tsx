@@ -1,0 +1,281 @@
+import { useRef, useEffect, useState } from 'react';
+import { motion } from 'motion/react';
+import { useLanguage } from '@/context/LanguageContext';
+
+interface IntroSequenceProps {
+  onComplete: () => void;
+}
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
+/* ── Pulsing scroll indicator with neural brand-gradient ── */
+const ScrollPulse = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 1.6, duration: 0.8, ease }}
+    className="absolute bottom-10 md:bottom-14 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+    style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+  >
+    <motion.div
+      animate={{ scale: [1, 1.18, 1], opacity: [0.45, 0.85, 0.45] }}
+      transition={{ repeat: Infinity, duration: 2.6, ease: 'easeInOut' }}
+      className="relative w-11 h-11 md:w-14 md:h-14 flex items-center justify-center"
+    >
+      {/* Conic gradient ring using brand tokens */}
+      <div
+        className="absolute inset-0 rounded-full"
+        style={{
+          background: `conic-gradient(from 180deg, var(--vyb-cyan), var(--vyb-teal), var(--vyb-lime), var(--vyb-yellow), var(--vyb-cyan))`,
+          filter: 'blur(5px)',
+          opacity: 0.7,
+        }}
+      />
+      <div className="absolute inset-[2px] rounded-full bg-background" />
+      <motion.svg
+        animate={{ y: [0, 5, 0] }}
+        transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+        width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="1.5"
+        className="relative z-10"
+        style={{ color: 'var(--vyb-cyan)' }}
+      >
+        <path d="M12 5v14M5 12l7 7 7-7" />
+      </motion.svg>
+    </motion.div>
+    <span className="vyb-ui-mono text-[8px] md:text-[9px] text-muted-foreground">
+      SCROLL
+    </span>
+  </motion.div>
+);
+
+const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
+  const { lang } = useLanguage();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeSection, setActiveSection] = useState(0);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const sections = el.querySelectorAll<HTMLElement>('[data-intro-section]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const idx = Number((entry.target as HTMLElement).dataset.introSection);
+            setActiveSection(idx);
+          }
+        });
+      },
+      { root: el, threshold: 0.6 }
+    );
+    sections.forEach(s => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (activeSection === 3) {
+      const t = setTimeout(onComplete, 2400);
+      return () => clearTimeout(t);
+    }
+  }, [activeSection, onComplete]);
+
+  return (
+    <motion.div
+      exit={{ opacity: 0, scale: 0.97, filter: 'blur(14px)' }}
+      transition={{ duration: 0.9, ease }}
+      className="fixed inset-0 z-[300] overflow-hidden bg-background"
+    >
+      {/* Cinematic layers */}
+      <div className="texture-overlay" aria-hidden="true" />
+      <div className="cinematic-vignette" aria-hidden="true" />
+
+      {/* Ambient radial glow behind content */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        aria-hidden="true"
+        style={{
+          background: `radial-gradient(ellipse 60% 50% at 50% 50%, rgba(41,200,232,0.06), transparent 70%)`,
+        }}
+      />
+
+      {/* Scroll container */}
+      <div
+        ref={scrollRef}
+        className="relative z-[1] w-full h-full overflow-y-auto snap-y snap-mandatory"
+        style={{ scrollbarWidth: 'none' }}
+      >
+        {/* ─── Section 0: Logos ─── */}
+        <section
+          data-intro-section="0"
+          className="relative w-full flex flex-col items-center justify-center snap-start snap-always"
+          style={{ height: '100svh' }}
+        >
+          <div className="flex items-center gap-10 md:gap-16">
+            {/* Elevate */}
+            <motion.div
+              initial={{ opacity: 0, x: -50, scale: 0.85 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 1.3, delay: 0.35, ease }}
+              className="relative"
+            >
+              <img
+                src="https://elevate-it.com/wp-content/uploads/2024/10/Elvete-logo-2-2048x333.png"
+                alt="Elevate"
+                className="w-[120px] md:w-[220px] h-auto object-contain"
+                style={{ filter: 'brightness(0) invert(1)' }}
+              />
+              {/* Subtle glow under logo */}
+              <div
+                className="absolute -inset-4 -z-10 rounded-full opacity-20 blur-2xl"
+                style={{ backgroundColor: 'var(--vyb-cyan)' }}
+              />
+            </motion.div>
+
+            {/* Divider — subtle brand accent */}
+            <motion.div
+              initial={{ scaleY: 0, opacity: 0 }}
+              animate={{ scaleY: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.8, ease }}
+              className="w-px h-10 md:h-14 origin-center"
+              style={{
+                background: `linear-gradient(to bottom, transparent, var(--vyb-teal), transparent)`,
+                opacity: 0.35,
+              }}
+            />
+
+            {/* Nojara */}
+            <motion.div
+              initial={{ opacity: 0, x: 50, scale: 0.85 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 1.3, delay: 0.5, ease }}
+              className="relative"
+            >
+              <img
+                src="https://static.wixstatic.com/media/227dff_d4d02dbb309a4982990c4a17aadfe4b2~mv2.png"
+                alt="Nojara"
+                className="w-[120px] md:w-[220px] h-auto object-contain"
+                style={{ filter: 'brightness(0) invert(1)' }}
+              />
+              <div
+                className="absolute -inset-4 -z-10 rounded-full opacity-20 blur-2xl"
+                style={{ backgroundColor: 'var(--vyb-teal)' }}
+              />
+            </motion.div>
+          </div>
+
+          <ScrollPulse />
+        </section>
+
+        {/* ─── Section 1: "presents" ─── */}
+        <section
+          data-intro-section="1"
+          className="relative w-full flex items-center justify-center snap-start snap-always"
+          style={{ height: '100svh' }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-20%' }}
+            transition={{ duration: 1, ease }}
+            className="text-center"
+          >
+            <span
+              className="font-mono font-semibold tracking-[0.35em] uppercase"
+              style={{
+                color: 'var(--vyb-cyan)',
+                fontSize: 'clamp(0.75rem, 1.4vw, 1.1rem)',
+                textShadow: '0 0 30px rgba(41,200,232,0.25)',
+              }}
+            >
+              {lang === 'ar' ? 'تقدّم' : 'PRESENTS'}
+            </span>
+            {/* Decorative line */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3, ease }}
+              className="mx-auto mt-4 h-px w-16 md:w-24 origin-center"
+              style={{
+                background: `linear-gradient(90deg, transparent, var(--vyb-cyan), transparent)`,
+                opacity: 0.4,
+              }}
+            />
+          </motion.div>
+        </section>
+
+        {/* ─── Section 2: Vyb Sessions ─── */}
+        <section
+          data-intro-section="2"
+          className="relative w-full flex items-center justify-center snap-start snap-always px-5"
+          style={{ height: '100svh' }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: '-15%' }}
+            transition={{ duration: 1.3, ease }}
+            className="text-center relative"
+          >
+            {/* Background glow behind title */}
+            <div
+              className="absolute inset-0 -z-10 blur-3xl opacity-15"
+              style={{
+                background: `radial-gradient(circle, var(--vyb-yellow), transparent 70%)`,
+              }}
+            />
+            <h1
+              className="vyb-hero-title"
+              style={{ color: 'hsl(var(--foreground))' }}
+            >
+              <span className="uppercase">V</span>
+              <span className="lowercase">yb</span>{' '}
+              <span>Sessions</span>
+            </h1>
+          </motion.div>
+        </section>
+
+        {/* ─── Section 3: Brought to you by Mobily ─── */}
+        <section
+          data-intro-section="3"
+          className="relative w-full flex flex-col items-center justify-center gap-6 md:gap-8 snap-start snap-always"
+          style={{ height: '100svh' }}
+        >
+          <motion.span
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-20%' }}
+            transition={{ duration: 0.9, ease }}
+            className="vyb-label tracking-[0.2em]"
+            style={{ color: 'hsl(var(--muted-foreground))' }}
+          >
+            {lang === 'ar' ? 'مقدّمة من' : 'BROUGHT TO YOU BY'}
+          </motion.span>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.82, y: 24 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: '-20%' }}
+            transition={{ duration: 1.1, delay: 0.2, ease }}
+            className="relative"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Mobily_Logo.svg/960px-Mobily_Logo.svg.png"
+              alt="Mobily"
+              className="h-14 md:h-20 lg:h-24 w-auto object-contain"
+              style={{ filter: 'brightness(0) invert(1)' }}
+            />
+            {/* Glow under Mobily */}
+            <div
+              className="absolute -inset-6 -z-10 rounded-full opacity-15 blur-3xl"
+              style={{ backgroundColor: 'var(--vyb-yellow)' }}
+            />
+          </motion.div>
+        </section>
+      </div>
+    </motion.div>
+  );
+};
+
+export default IntroSequence;

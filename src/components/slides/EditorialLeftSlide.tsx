@@ -1,0 +1,96 @@
+import { motion } from 'motion/react';
+import { ComputedSlide } from '@/data/slides';
+import MotionBlock from '@/components/MotionBlock';
+import SlideBackground from '@/components/SlideBackground';
+import VideoEmbed from '@/components/VideoEmbed';
+import MediaPlaceholder from '@/components/MediaPlaceholder';
+import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
+import { useLanguage } from '@/context/LanguageContext';
+import { formatText } from '@/utils/formatText';
+
+const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index: number }) => {
+  const slide = useTranslatedSlide(rawSlide);
+  const { lang } = useLanguage();
+  const { palette } = slide;
+  const hasMedia = slide.media && slide.media.length > 0;
+
+  return (
+    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-20 pb-16" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+      <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
+
+      <div className={`relative z-10 w-full grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-12 items-center max-w-6xl`}>
+        <div>
+          <MotionBlock motionKey="spotlightFade" delay={0}>
+            <motion.span
+              className="vyb-label inline-block opacity-40 mb-[var(--space-kicker-to-title)] border-b pb-2"
+              style={{ borderColor: `${palette.text}33`, color: palette.text }}
+              whileHover={{ opacity: 0.8, x: 4 }}
+              transition={{ duration: 0.3 }}
+            >
+              {slide.section}
+            </motion.span>
+          </MotionBlock>
+
+          {slide.headline && (
+            <MotionBlock motionKey="maskReveal" delay={0.15}>
+              <motion.h2
+                className="vyb-section-title mb-[var(--space-title-to-subtitle)]"
+                style={{ color: palette.primary }}
+                whileHover={{ x: 6 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {formatText(slide.headline)}
+              </motion.h2>
+            </MotionBlock>
+          )}
+
+          {slide.subheadline && (
+            <MotionBlock motionKey="diagIn" delay={0.3}>
+              <motion.p
+                className="vyb-subtitle opacity-80 mb-[var(--space-subtitle-to-body)]"
+                style={{ color: palette.text }}
+                whileHover={{ opacity: 1 }}
+              >
+                {formatText(slide.subheadline)}
+              </motion.p>
+            </MotionBlock>
+          )}
+
+          {slide.body?.map((para, i) => (
+            <MotionBlock key={i} motionKey="editorialSweep" delay={0.4 + i * 0.15}>
+              <motion.p
+                className="vyb-body opacity-70 max-w-3xl mb-[var(--space-body-to-body)]"
+                style={{ color: palette.text }}
+                whileHover={{ opacity: 1, x: 3 }}
+                transition={{ duration: 0.25 }}
+              >
+                {formatText(para)}
+              </motion.p>
+            </MotionBlock>
+          ))}
+        </div>
+
+        {/* Media column */}
+        <div className="hidden md:flex flex-col items-center gap-6">
+          {hasMedia ? (
+            slide.media!.map((m, i) => (
+              m.videoSrc ? (
+                <VideoEmbed key={i} videoSrc={m.videoSrc} type={m.type as 'vertical' | 'square'} startTime={m.startTime} delay={0.5 + i * 0.2} />
+              ) : null
+            ))
+          ) : (
+            <MediaPlaceholder
+              style="editorial"
+              accentColor={palette.accent}
+              textColor={palette.text}
+              label={slide.section?.toUpperCase()}
+              delay={0.5}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default EditorialLeftSlide;

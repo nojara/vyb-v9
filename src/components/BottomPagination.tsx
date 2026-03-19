@@ -26,8 +26,8 @@ const BottomPagination = ({ activeId, palette, progress }: BottomPaginationProps
           animate={{ y: 0, opacity: 0.6 }}
           exit={{ y: -12, opacity: 0 }}
           transition={{ duration: 0.25 }}
-          className="font-mono text-[clamp(0.7rem,1.5vw,0.9rem)] tabular-nums"
-          style={{ color: palette.text, letterSpacing: 'var(--ls-mono)' }}
+          className="font-mono text-[11px] tabular-nums"
+          style={{ color: 'rgba(255,255,255,0.35)', letterSpacing: '0.14em' }}
           aria-hidden="true"
         >
           {String(activeIndex).padStart(2, '0')}

@@ -18,78 +18,81 @@ const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
 
   return (
     <div
-      className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24 overflow-y-auto md:overflow-visible"
+      className="relative w-full h-full slide-content-safe overflow-y-auto md:overflow-visible"
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
     >
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
-      {hasBg && <DimLayer opacity={0.45} />}
+      {hasBg && <DimLayer opacity={0.45} mode="gradient" />}
 
-      <div className="relative z-10 w-full grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-12 items-center max-w-6xl">
-        <div>
-          <MotionBlock motionKey="spotlightFade" delay={0}>
-            <motion.span
-              className="vyb-label inline-block opacity-40 mb-[var(--space-kicker-to-title)] border-b pb-2 clean-hover"
-              style={{ borderColor: `${palette.text}33`, color: palette.text }}
-              whileHover={{ opacity: 0.8 }}
-              transition={{ duration: 0.3 }}
-            >
-              {slide.section}
-            </motion.span>
-          </MotionBlock>
-
-          {slide.headline && (
-            <MotionBlock motionKey="maskReveal" delay={0.15}>
-              <h2
-                className="vyb-section-title mb-[var(--space-title-to-subtitle)]"
-                style={{ color: palette.primary, maxWidth: 'var(--mw-title)' }}
+      <div className="relative z-10 w-full h-full flex items-center">
+        <div className="w-full grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-12 items-center max-w-6xl">
+          {/* Text column — left-aligned desktop, centered mobile */}
+          <div className="text-center md:text-left">
+            <MotionBlock motionKey="spotlightFade" delay={0}>
+              <motion.span
+                className="vyb-label inline-block opacity-40 mb-[var(--space-kicker-to-title)] border-b pb-2 clean-hover"
+                style={{ borderColor: `${palette.text}33`, color: palette.text }}
+                whileHover={{ opacity: 0.8 }}
+                transition={{ duration: 0.3 }}
               >
-                {formatText(slide.headline)}
-              </h2>
+                {slide.section}
+              </motion.span>
             </MotionBlock>
-          )}
 
-          {slide.subheadline && (
-            <MotionBlock motionKey="diagIn" delay={0.3}>
-              <p
-                className="vyb-subtitle opacity-80 mb-[var(--space-subtitle-to-body)]"
-                style={{ color: palette.text }}
-              >
-                {formatText(slide.subheadline)}
-              </p>
-            </MotionBlock>
-          )}
+            {slide.headline && (
+              <MotionBlock motionKey="maskReveal" delay={0.15}>
+                <h2
+                  className="vyb-section-title mb-[var(--space-title-to-subtitle)] text-[length:var(--t-xl)] md:text-[length:var(--fs-section-title)]"
+                  style={{ color: palette.primary, maxWidth: 'var(--mw-title)' }}
+                >
+                  {formatText(slide.headline)}
+                </h2>
+              </MotionBlock>
+            )}
 
-          {slide.body?.map((para, i) => (
-            <MotionBlock key={i} motionKey="editorialSweep" delay={0.4 + i * 0.15}>
-              <motion.p
-                className="vyb-body opacity-70 mb-[var(--space-body-to-body)] clean-hover"
-                style={{ color: palette.text, maxWidth: 'var(--mw-body)' }}
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.25 }}
-              >
-                {formatText(para)}
-              </motion.p>
-            </MotionBlock>
-          ))}
-        </div>
+            {slide.subheadline && (
+              <MotionBlock motionKey="diagIn" delay={0.3}>
+                <p
+                  className="vyb-subtitle opacity-80 mb-[var(--space-subtitle-to-body)]"
+                  style={{ color: palette.text }}
+                >
+                  {formatText(slide.subheadline)}
+                </p>
+              </MotionBlock>
+            )}
 
-        {/* Media column */}
-        <div className="hidden md:flex flex-col items-center gap-6">
-          {hasMedia ? (
-            slide.media!.map((m, i) => (
-              m.videoSrc ? (
-                <VideoEmbed key={i} videoSrc={m.videoSrc} type={m.type as 'vertical' | 'square'} startTime={m.startTime} delay={0.5 + i * 0.2} />
-              ) : null
-            ))
-          ) : (
-            <MediaPlaceholder
-              style="editorial"
-              accentColor={palette.accent}
-              textColor={palette.text}
-              label={slide.section?.toUpperCase()}
-              delay={0.5}
-            />
-          )}
+            {slide.body?.map((para, i) => (
+              <MotionBlock key={i} motionKey="editorialSweep" delay={0.4 + i * 0.15}>
+                <motion.p
+                  className="vyb-body opacity-70 mb-[var(--space-body-to-body)] clean-hover mx-auto md:mx-0"
+                  style={{ color: palette.text, maxWidth: 'var(--mw-body)' }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  {formatText(para)}
+                </motion.p>
+              </MotionBlock>
+            ))}
+          </div>
+
+          {/* Media column */}
+          <div className="hidden md:flex flex-col items-center gap-6 max-w-[40vw] overflow-hidden">
+            {hasMedia ? (
+              slide.media!.map((m, i) => (
+                m.videoSrc ? (
+                  <VideoEmbed key={i} videoSrc={m.videoSrc} type={m.type as 'vertical' | 'square'} startTime={m.startTime} delay={0.5 + i * 0.2} />
+                ) : null
+              ))
+            ) : (
+              <MediaPlaceholder
+                style="editorial"
+                accentColor={palette.accent}
+                textColor={palette.text}
+                label={slide.section?.toUpperCase()}
+                delay={0.5}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

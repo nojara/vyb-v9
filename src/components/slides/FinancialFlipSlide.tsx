@@ -7,17 +7,32 @@ const FinancialFlipSlide = ({ slide, index }: { slide: ComputedSlide; index: num
   const { palette } = slide;
 
   return (
-    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-20 pb-16">
+    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24">
       <div className="w-full max-w-6xl">
+        {/* Standardized section label */}
         <AnimatedBlock slideIndex={index} delay={0}>
-          <span className="vyb-label opacity-40 mb-[var(--space-kicker-to-title)] block" style={{ color: palette.text }}>
+          <span
+            className="vyb-label inline-block opacity-40"
+            style={{
+              color: palette.text,
+              letterSpacing: '0.15em',
+              marginBottom: '16px',
+              display: 'inline-block',
+            }}
+          >
             {slide.section}
           </span>
         </AnimatedBlock>
 
         {slide.headline && (
           <AnimatedBlock slideIndex={index} delay={0.12}>
-            <h2 className="vyb-section-title mb-[var(--space-kicker-to-title)]" style={{ color: palette.primary }}>
+            <h2
+              className="vyb-section-title mb-[var(--space-kicker-to-title)]"
+              style={{
+                color: palette.primary,
+                fontSize: 'clamp(24px, 6vw, 112px)',
+              }}
+            >
               {formatText(slide.headline)}
             </h2>
           </AnimatedBlock>
@@ -31,7 +46,8 @@ const FinancialFlipSlide = ({ slide, index }: { slide: ComputedSlide; index: num
           </AnimatedBlock>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8">
+        {/* Equal height cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8 items-stretch">
           {slide.pillars?.map((pillar, i) => (
             <AnimatedBlock key={i} slideIndex={index} delay={0.3 + i * 0.12}>
               <GlassCard accentColor={palette.primary}>

@@ -284,6 +284,7 @@
     line-height: var(--lh-body-tight);
     font-weight: var(--fw-body);
     text-wrap: pretty;
+    text-align: left;
   }
 
   .vyb-body {

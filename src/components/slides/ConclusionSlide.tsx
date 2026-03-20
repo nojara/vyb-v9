@@ -7,16 +7,24 @@ const ConclusionSlide = ({ slide, index }: { slide: ComputedSlide; index: number
   const { palette } = slide;
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-8 pt-20 pb-16">
+    <div className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-8 pt-24 pb-24 overflow-hidden">
       <AnimatedBlock slideIndex={index} delay={0.2}>
-        <h2 className="vyb-hero-title mb-[var(--space-title-to-subtitle)]" style={{ color: palette.primary }}>
+        <h2
+          className="vyb-hero-title mb-[var(--space-title-to-subtitle)] text-center"
+          style={{
+            color: palette.primary,
+            fontSize: 'clamp(32px, 8vw, 120px)',
+            maxWidth: '90vw',
+            overflowWrap: 'break-word',
+          }}
+        >
           {formatText(slide.headline || '')}
         </h2>
       </AnimatedBlock>
 
       {slide.subheadline && (
         <AnimatedBlock slideIndex={index} delay={0.4}>
-          <p className="vyb-subtitle opacity-70 mb-8" style={{ color: palette.text }}>
+          <p className="vyb-subtitle opacity-70 mb-8 text-center" style={{ color: palette.text }}>
             {slide.subheadline}
           </p>
         </AnimatedBlock>
@@ -24,7 +32,7 @@ const ConclusionSlide = ({ slide, index }: { slide: ComputedSlide; index: number
 
       {slide.body?.map((para, i) => (
         <AnimatedBlock key={i} slideIndex={index} delay={0.6 + i * 0.12}>
-          <p className="vyb-label opacity-40 mb-2" style={{ color: palette.text }}>
+          <p className="vyb-label opacity-40 mb-2 text-center" style={{ color: palette.text }}>
             {para}
           </p>
         </AnimatedBlock>

@@ -19,9 +19,9 @@ const ClosingSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index:
   const hasBg = !!(slide.bgImage || slide.bgVideo);
 
   return (
-    <div ref={containerRef} className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-8 pt-24 pb-24 no-glitch" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div ref={containerRef} className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-8 pt-24 pb-24 no-glitch overflow-hidden" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
-      {hasBg && <DimLayer opacity={0.52} mode="gradient" />}
+      {hasBg && <DimLayer opacity={0.55} mode="gradient" />}
 
       {/* Vignette overlay */}
       <div
@@ -44,8 +44,13 @@ const ClosingSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index:
       <div className="relative z-10 flex flex-col items-center">
         <MotionBlock motionKey="heroLift" delay={0.2}>
           <motion.h2
-            className="vyb-hero-title mb-[var(--space-title-to-subtitle)]"
-            style={{ color: palette.primary }}
+            className="vyb-hero-title mb-[var(--space-title-to-subtitle)] text-center"
+            style={{
+              color: palette.primary,
+              fontSize: 'clamp(32px, 8vw, 120px)',
+              maxWidth: '90vw',
+              overflowWrap: 'break-word',
+            }}
             animate={{ x: mouse.x * 0.3, y: mouse.y * 0.2 }}
             transition={{ type: 'spring', stiffness: 70, damping: 35 }}
           >
@@ -55,7 +60,7 @@ const ClosingSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index:
 
         {slide.subheadline && (
           <MotionBlock motionKey="blurResolve" delay={0.5}>
-            <p className="vyb-subtitle opacity-70 mb-10" style={{ color: palette.text }}>
+            <p className="vyb-subtitle opacity-70 mb-10 text-center" style={{ color: palette.text }}>
               {slide.subheadline}
             </p>
           </MotionBlock>
@@ -75,7 +80,7 @@ const ClosingSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index:
         {slide.body?.map((para, i) => (
           <MotionBlock key={i} motionKey="ctaBreathe" delay={0.7 + i * 0.5}>
             <motion.p
-              className="vyb-label opacity-40 mb-2"
+              className="vyb-label opacity-40 mb-2 text-center"
               style={{ color: palette.text }}
               whileHover={{ opacity: 0.8 }}
             >

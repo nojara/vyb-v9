@@ -21,7 +21,7 @@ const SlideBackground = ({ bgImage, videoSrc, index, textColor }: SlideBackgroun
 
   const isDarkText = textColor === '#0A0A0A' || textColor === '#000000';
   const blendMode = isDarkText ? 'mix-blend-multiply' : 'mix-blend-screen';
-  const shapeOpacity = isDarkText ? 'opacity-15' : 'opacity-25';
+  const shapeOpacity = isDarkText ? 'opacity-10' : 'opacity-15';
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -52,13 +52,13 @@ const SlideBackground = ({ bgImage, videoSrc, index, textColor }: SlideBackgroun
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Layer 0: Base image — 100vw×100vh cover */}
+          {/* Layer 0: Base image — dimmed for readability */}
           {prefersReduced ? (
             <img
               src={bgImage}
               alt=""
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-              style={{ opacity: isDarkText ? 0.15 : 0.25 }}
+              style={{ opacity: isDarkText ? 0.12 : 0.18 }}
               loading="lazy"
             />
           ) : (
@@ -66,7 +66,7 @@ const SlideBackground = ({ bgImage, videoSrc, index, textColor }: SlideBackgroun
               src={bgImage}
               alt=""
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-              style={{ opacity: isDarkText ? 0.15 : 0.25 }}
+              style={{ opacity: isDarkText ? 0.12 : 0.18 }}
               initial={{ scale: 1.15 }}
               whileInView={{ scale: 1.02 }}
               viewport={{ once: true }}
@@ -82,7 +82,7 @@ const SlideBackground = ({ bgImage, videoSrc, index, textColor }: SlideBackgroun
               alt=""
               className="absolute inset-[-10%] w-[120%] h-[120%] object-cover pointer-events-none blur-[8px]"
               style={{
-                opacity: isDarkText ? 0.08 : 0.12,
+                opacity: isDarkText ? 0.06 : 0.08,
                 x: springX,
                 y: springY,
               }}
@@ -90,13 +90,13 @@ const SlideBackground = ({ bgImage, videoSrc, index, textColor }: SlideBackgroun
             />
           )}
 
-          {/* #3: Strong dark overlay for text readability on patterned backgrounds */}
+          {/* Strong dark overlay for WCAG AA text contrast on patterned backgrounds */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
               background: isDarkText
-                ? 'radial-gradient(ellipse at 50% 40%, transparent 20%, rgba(0,0,0,0.25) 100%), linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 40%, rgba(0,0,0,0.3) 100%)'
-                : 'radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.55) 100%), linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.6) 100%)',
+                ? 'radial-gradient(ellipse at 50% 40%, transparent 20%, rgba(0,0,0,0.3) 100%), linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 40%, rgba(0,0,0,0.35) 100%)'
+                : 'radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.65) 100%), linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.7) 100%)',
             }}
           />
         </div>
@@ -111,9 +111,9 @@ const SlideBackground = ({ bgImage, videoSrc, index, textColor }: SlideBackgroun
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none"
+            className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/50" />
         </div>
       )}
 

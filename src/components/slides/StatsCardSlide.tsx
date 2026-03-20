@@ -6,11 +6,17 @@ const StatsCardSlide = ({ slide, index }: { slide: ComputedSlide; index: number 
   const { palette } = slide;
 
   return (
-    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-20 pb-16">
+    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24">
       <div className="w-full max-w-6xl">
         {slide.headline && (
           <AnimatedBlock slideIndex={index} delay={0}>
-            <h2 className="vyb-section-title mb-[var(--space-kicker-to-title)]" style={{ color: palette.primary }}>
+            <h2
+              className="vyb-section-title mb-[var(--space-kicker-to-title)]"
+              style={{
+                color: palette.primary,
+                fontSize: 'clamp(24px, 6vw, 112px)',
+              }}
+            >
               {formatText(slide.headline)}
             </h2>
           </AnimatedBlock>
@@ -24,11 +30,12 @@ const StatsCardSlide = ({ slide, index }: { slide: ComputedSlide; index: number 
           </AnimatedBlock>
         )}
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+        {/* Equal height stat cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 items-stretch">
           {slide.stats?.map((stat, i) => (
             <AnimatedBlock key={i} slideIndex={index} delay={0.2 + i * 0.12}>
               <div
-                className="text-center p-5 md:p-8 rounded-[var(--vyb-radius-card)] border backdrop-blur-md md:backdrop-blur-xl relative overflow-hidden"
+                className="text-center p-5 md:p-8 rounded-[var(--vyb-radius-card)] border backdrop-blur-md md:backdrop-blur-xl relative overflow-hidden h-full"
                 style={{
                   borderColor: `${palette.primary}15`,
                   background: 'var(--vyb-glass-dark)',

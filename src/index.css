@@ -284,6 +284,7 @@
     line-height: var(--lh-body-tight);
     font-weight: var(--fw-body);
     text-wrap: pretty;
+    text-align: left;
   }
 
   .vyb-body {
@@ -292,6 +293,7 @@
     line-height: var(--lh-body);
     font-weight: var(--fw-body);
     text-wrap: pretty;
+    text-align: left;
   }
 
   .vyb-body-sm {
@@ -300,6 +302,7 @@
     line-height: 1.5;
     font-weight: var(--fw-body);
     text-wrap: pretty;
+    text-align: left;
   }
 
   .vyb-label {

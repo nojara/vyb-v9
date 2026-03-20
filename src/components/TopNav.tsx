@@ -22,7 +22,6 @@ const NAV_SECTIONS = [
 const TopNav = ({ activeId, palette }: TopNavProps) => {
   const { lang, toggle } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
-  const filterClass = 'brightness-0 invert';
 
   const scrollToSlide = (slideId: string) => {
     const el = document.querySelector(`[data-slide-id="${slideId}"]`);
@@ -30,6 +29,10 @@ const TopNav = ({ activeId, palette }: TopNavProps) => {
       el.scrollIntoView({ behavior: 'smooth' });
       setMenuOpen(false);
     }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -43,25 +46,33 @@ const TopNav = ({ activeId, palette }: TopNavProps) => {
         className="relative w-full max-w-7xl px-3 py-1.5 md:px-6 md:py-3 flex justify-between items-center pointer-events-auto rounded-full nav-glass transition-all duration-700"
         style={{ color: '#FFFFFF' }}
       >
-        {/* Left: Nojara logo */}
-        <div className="flex-shrink-0 flex items-center">
+        {/* Left: Nojara logo — clickable to scroll to top */}
+        <button
+          onClick={scrollToTop}
+          className="flex-shrink-0 flex items-center cursor-pointer"
+          aria-label="Scroll to top"
+        >
           <img
             src="https://static.wixstatic.com/media/227dff_d4d02dbb309a4982990c4a17aadfe4b2~mv2.png"
             alt="Nojara"
-            className={`h-3 md:h-5 w-auto object-contain ${filterClass}`}
+            className="h-3 md:h-5 w-auto object-contain"
             style={{ filter: `brightness(0) invert(1) drop-shadow(0 0 8px ${palette.primary})` }}
           />
-        </div>
+        </button>
 
-        {/* Center: Mobily */}
-        <div className="flex-shrink-0 flex justify-center mx-2 md:mx-4">
+        {/* Center: Mobily — clickable to scroll to top */}
+        <button
+          onClick={scrollToTop}
+          className="flex-shrink-0 flex justify-center mx-2 md:mx-4 cursor-pointer"
+          aria-label="Scroll to top"
+        >
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Mobily_Logo.svg/960px-Mobily_Logo.svg.png"
             alt="Mobily"
             className="h-6 md:h-10 w-auto object-contain"
             style={{ filter: `brightness(0) invert(1) drop-shadow(0 0 8px ${palette.primary})` }}
           />
-        </div>
+        </button>
 
         {/* Right: Elevate + Language toggle + Hamburger */}
         <div className="flex-shrink-0 flex items-center gap-2 md:gap-4">
@@ -101,7 +112,7 @@ const TopNav = ({ activeId, palette }: TopNavProps) => {
             </span>
           </motion.button>
 
-          {/* #11: Hamburger menu */}
+          {/* Hamburger menu */}
           <motion.button
             onClick={() => setMenuOpen(!menuOpen)}
             whileHover={{ scale: 1.1 }}
@@ -115,7 +126,7 @@ const TopNav = ({ activeId, palette }: TopNavProps) => {
         </div>
       </nav>
 
-      {/* #11: Dropdown navigation menu */}
+      {/* Dropdown navigation menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -125,7 +136,7 @@ const TopNav = ({ activeId, palette }: TopNavProps) => {
             transition={{ duration: 0.25 }}
             className="absolute top-full mt-2 right-4 md:right-auto md:left-1/2 md:-translate-x-1/2 pointer-events-auto rounded-2xl overflow-hidden"
             style={{
-              background: 'rgba(0, 0, 0, 0.88)',
+              background: 'rgba(0, 0, 0, 0.92)',
               backdropFilter: 'blur(30px)',
               WebkitBackdropFilter: 'blur(30px)',
               border: '1px solid rgba(255, 255, 255, 0.12)',

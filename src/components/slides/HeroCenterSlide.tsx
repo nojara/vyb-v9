@@ -22,9 +22,9 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
   return (
     <div ref={containerRef} className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-8 pt-24 pb-24 no-glitch overflow-hidden" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
-      {hasBg && <DimLayer opacity={0.45} mode="gradient" />}
+      {hasBg && <DimLayer opacity={0.55} mode="gradient" />}
 
-      <div className="relative z-10 w-full max-w-[90vw] flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-[90vw] flex flex-col items-center overflow-hidden">
         {/* Floating accent orb */}
         <motion.div
           className="absolute -top-24 -right-32 w-64 h-64 rounded-full pointer-events-none opacity-20 blur-[80px]"
@@ -44,13 +44,13 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
           </motion.span>
         </MotionBlock>
 
-        {/* #1 #2 #14: Hero title — fluid, centered, no overflow */}
+        {/* Hero title — capped to never overflow */}
         <MotionBlock motionKey="heroLift" delay={0.4}>
           <motion.h1
             className="vyb-hero-title text-center w-full"
             style={{
               color: palette.primary,
-              fontSize: 'clamp(40px, 10vw, 160px)',
+              fontSize: 'clamp(32px, 8vw, 120px)',
               maxWidth: '100%',
               overflowWrap: 'break-word',
               wordBreak: 'break-word',
@@ -65,7 +65,7 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
         {slide.subheadline && (
           <MotionBlock motionKey="blurResolve" delay={0.6} className="mt-[var(--space-title-to-subtitle)]">
             <motion.p
-              className="vyb-subtitle opacity-80"
+              className="vyb-subtitle opacity-80 text-center"
               style={{ color: palette.text }}
               animate={{ x: -mouse.x * 0.2, y: -mouse.y * 0.15 }}
               transition={{ type: 'spring', stiffness: 60, damping: 35 }}
@@ -86,7 +86,6 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
           />
         </div>
 
-        {/* #12: Changed swipe hint to scroll with down arrow */}
         <MotionBlock motionKey="ctaBreathe" delay={0.9} className="mt-[var(--space-body-to-cta)]">
           <motion.div
             animate={{ y: [0, 12, 0] }}

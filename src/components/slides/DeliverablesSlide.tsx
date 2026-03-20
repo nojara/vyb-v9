@@ -6,17 +6,32 @@ const DeliverablesSlide = ({ slide, index }: { slide: ComputedSlide; index: numb
   const { palette } = slide;
 
   return (
-    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-20 pb-16">
+    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24">
       <div className="w-full max-w-6xl">
+        {/* Standardized section label */}
         <AnimatedBlock slideIndex={index} delay={0}>
-          <span className="vyb-label opacity-40 mb-[var(--space-kicker-to-title)] block" style={{ color: palette.text }}>
+          <span
+            className="vyb-label inline-block opacity-40"
+            style={{
+              color: palette.text,
+              letterSpacing: '0.15em',
+              marginBottom: '16px',
+              display: 'inline-block',
+            }}
+          >
             {slide.section}
           </span>
         </AnimatedBlock>
 
         {slide.headline && (
           <AnimatedBlock slideIndex={index} delay={0.12}>
-            <h2 className="vyb-section-title mb-[var(--space-kicker-to-title)]" style={{ color: palette.primary }}>
+            <h2
+              className="vyb-section-title mb-[var(--space-kicker-to-title)]"
+              style={{
+                color: palette.primary,
+                fontSize: 'clamp(24px, 6vw, 112px)',
+              }}
+            >
               {formatText(slide.headline)}
             </h2>
           </AnimatedBlock>
@@ -30,11 +45,12 @@ const DeliverablesSlide = ({ slide, index }: { slide: ComputedSlide; index: numb
           </AnimatedBlock>
         )}
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
+        {/* Equal height cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 items-stretch">
           {slide.pillars?.map((item, i) => (
             <AnimatedBlock key={i} slideIndex={index} delay={0.3 + i * 0.1}>
               <div
-                className="text-center p-5 md:p-6 rounded-[var(--vyb-radius-card)] border backdrop-blur-md md:backdrop-blur-xl relative overflow-hidden"
+                className="text-center p-5 md:p-6 rounded-[var(--vyb-radius-card)] border backdrop-blur-md md:backdrop-blur-xl relative overflow-hidden h-full"
                 style={{
                   borderColor: `${palette.primary}18`,
                   background: 'var(--vyb-glass-dark)',
@@ -47,7 +63,7 @@ const DeliverablesSlide = ({ slide, index }: { slide: ComputedSlide; index: numb
                 <span className="vyb-metric block" style={{ color: palette.primary }}>
                   {item.title}
                 </span>
-                <span className="vyb-body-sm block mt-2 opacity-60" style={{ color: palette.text }}>
+                <span className="vyb-body-sm block mt-2 opacity-60 text-center" style={{ color: palette.text }}>
                   {item.text}
                 </span>
               </div>

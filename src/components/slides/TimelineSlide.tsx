@@ -23,7 +23,7 @@ const TimelineSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index
 
         {slide.headline && (
           <AnimatedBlock slideIndex={index} delay={0.1}>
-            <h2 className="vyb-section-title mb-2" style={{ color: palette.primary }}>
+            <h2 className="vyb-section-title mb-2" style={{ color: palette.primary, fontSize: 'clamp(24px, 6vw, 112px)' }}>
               {formatText(slide.headline)}
             </h2>
           </AnimatedBlock>

@@ -45,8 +45,14 @@ const BottomPagination = ({ activeId, palette, progress }: BottomPaginationProps
 
       {/* Total */}
       <span
-        className="font-mono text-[11px] tabular-nums"
-        style={{ color: 'rgba(255,255,255,0.18)', letterSpacing: '0.14em' }}
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--t-xs, 11px)',
+          fontWeight: 400,
+          color: 'rgba(255,255,255,0.3)',
+          letterSpacing: '0.1em',
+        }}
+        className="tabular-nums"
         aria-hidden="true"
       >
         {String(SLIDES.length).padStart(2, '0')}

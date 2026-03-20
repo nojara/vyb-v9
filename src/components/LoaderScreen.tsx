@@ -80,7 +80,7 @@ const LoaderScreen = ({ onStart }: LoaderScreenProps) => {
             whileTap={{ scale: 0.95 }}
             onClick={onStart}
             className="group relative overflow-hidden px-10 py-4 md:px-16 md:py-6 rounded-full text-xs md:text-sm uppercase tracking-[0.2em] md:tracking-[0.3em] font-black transition-all cursor-pointer"
-            style={{ backgroundColor: '#fff', color: '#000', fontFamily: 'var(--f-mono)' }}
+            style={{ backgroundColor: '#fff', color: '#000', fontFamily: 'var(--font-mono)' }}
           >
             <span className="relative z-10">
               {lang === 'ar' ? 'ابدأ التجربة' : 'START EXPERIENCE'}

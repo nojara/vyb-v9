@@ -1,16 +1,17 @@
 interface DimLayerProps {
   opacity?: number;
-  gradient?: boolean;
+  mode?: 'gradient' | 'flat';
 }
 
-const DimLayer = ({ opacity = 0.45, gradient = false }: DimLayerProps) => (
+const DimLayer = ({ opacity = 0.5, mode = 'flat' }: DimLayerProps) => (
   <div
     className="absolute inset-0 pointer-events-none"
     style={{
       zIndex: 'var(--z-fx)' as any,
-      background: gradient
-        ? `linear-gradient(to bottom, rgba(0,0,0,${opacity * 0.6}), rgba(0,0,0,${opacity}))`
-        : `rgba(0,0,0,${opacity})`,
+      background:
+        mode === 'gradient'
+          ? `linear-gradient(to bottom, rgba(0,0,0,${opacity * 0.6}), rgba(0,0,0,${opacity}))`
+          : `rgba(0,0,0,${opacity})`,
     }}
     aria-hidden="true"
   />

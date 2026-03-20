@@ -21,7 +21,7 @@ const ClosingSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index:
   return (
     <div ref={containerRef} className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-8 pt-24 pb-24 no-glitch" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
-      {hasBg && <DimLayer opacity={0.52} gradient />}
+      {hasBg && <DimLayer opacity={0.52} mode="gradient" />}
 
       {/* Vignette overlay */}
       <div

@@ -54,8 +54,8 @@ const LoaderScreen = ({ onStart }: LoaderScreenProps) => {
             transition={{ delay: 0.5, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           >
             <h1
-              className="type-display mb-6 md:mb-8 tracking-[-0.08em] text-[clamp(2.2rem,10vw,7rem)]"
-              style={{ color: '#fff' }}
+              className="type-display mb-6 md:mb-8 tracking-[-0.08em]"
+              style={{ color: '#fff', fontSize: 'clamp(1.8rem, 8vw, 7rem)', maxWidth: '100%', overflowWrap: 'break-word' }}
             >
               {formatText(lang === 'ar' ? 'جلسات Vyb الحيّة' : 'Vyb SESSIONS')}
             </h1>

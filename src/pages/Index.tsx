@@ -30,10 +30,19 @@ const MainExperience = () => {
   const [activeId, setActiveId] = useState(SLIDES[0].id);
   const scrollRef = useRef<HTMLDivElement>(null);
   const prefersReduced = useReducedMotion();
+  const navJumpRef = useRef<string | null>(null);
+  const navJumpTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const activeSlide = SLIDES.find(s => s.id === activeId) || SLIDES[0];
   const activeIndex = SLIDES.findIndex(s => s.id === activeId);
   const progress = SLIDES.length > 1 ? activeIndex / (SLIDES.length - 1) : 0;
+
+  const handleNavigate = useCallback((slideId: string) => {
+    setActiveId(slideId);
+    navJumpRef.current = slideId;
+    if (navJumpTimerRef.current) clearTimeout(navJumpTimerRef.current);
+    navJumpTimerRef.current = setTimeout(() => { navJumpRef.current = null; }, 2000);
+  }, []);
 
   const scrollToSlide = useCallback((direction: 'next' | 'prev') => {
     const el = scrollRef.current;
@@ -63,6 +72,8 @@ const MainExperience = () => {
     const sections = el.querySelectorAll<HTMLElement>('[data-slide-id]');
     const observer = new IntersectionObserver(
       (entries) => {
+        // Skip observer updates during programmatic navigation
+        if (navJumpRef.current) return;
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const id = (entry.target as HTMLElement).dataset.slideId;
@@ -83,7 +94,7 @@ const MainExperience = () => {
       transition={{ duration: prefersReduced ? 0 : 0.6 }}
       role="main"
     >
-      <TopNav activeId={activeId} palette={activeSlide.palette} onNavigate={setActiveId} />
+      <TopNav activeId={activeId} palette={activeSlide.palette} onNavigate={handleNavigate} />
       {!prefersReduced && <TransitionFlash activeId={activeId} />}
 
       {/* Smooth cross-fade background */}

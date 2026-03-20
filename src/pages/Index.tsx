@@ -94,7 +94,7 @@ const MainExperience = () => {
       transition={{ duration: prefersReduced ? 0 : 0.6 }}
       role="main"
     >
-      <TopNav activeId={activeId} palette={activeSlide.palette} onNavigate={setActiveId} />
+      <TopNav activeId={activeId} palette={activeSlide.palette} onNavigate={handleNavigate} />
       {!prefersReduced && <TransitionFlash activeId={activeId} />}
 
       {/* Smooth cross-fade background */}

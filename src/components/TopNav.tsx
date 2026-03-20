@@ -7,6 +7,7 @@ import { SLIDES } from '@/data/slides';
 interface TopNavProps {
   activeId: string;
   palette: { bg: string; primary: string; text: string; accent: string };
+  onNavigate?: (slideId: string) => void;
 }
 
 /** Key navigation anchors mapped to slide IDs */
@@ -19,7 +20,7 @@ const NAV_SECTIONS = [
   { label: 'Contact', id: 'S34' },
 ];
 
-const TopNav = ({ activeId, palette }: TopNavProps) => {
+const TopNav = ({ activeId, palette, onNavigate }: TopNavProps) => {
   const { lang, toggle } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -27,6 +28,7 @@ const TopNav = ({ activeId, palette }: TopNavProps) => {
     const el = document.querySelector(`[data-slide-id="${slideId}"]`);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
+      onNavigate?.(slideId);
       setMenuOpen(false);
     }
   };

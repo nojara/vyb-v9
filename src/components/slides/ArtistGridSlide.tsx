@@ -24,18 +24,21 @@ const ArtistGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
   return (
     <div className="relative w-full h-full flex items-start px-4 md:px-24 pt-24 pb-24 overflow-y-auto" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
-      {hasBg && <DimLayer opacity={0.45} />}
+      {hasBg && <DimLayer opacity={0.5} />}
 
       <div className="relative z-10 w-full max-w-6xl mx-auto">
         <MotionBlock motionKey="spotlightFade" delay={0}>
-          <span className="vyb-label inline-block opacity-40 mb-2" style={{ color: palette.text }}>
+          <span
+            className="vyb-label inline-block opacity-40 mb-2"
+            style={{ color: palette.text, letterSpacing: '0.15em', marginBottom: '16px', display: 'inline-block' }}
+          >
             {slide.section}
           </span>
         </MotionBlock>
 
         {slide.headline && (
           <MotionBlock motionKey="maskReveal" delay={0.1}>
-            <h2 className="vyb-section-title mb-2" style={{ color: palette.primary }}>
+            <h2 className="vyb-section-title mb-2" style={{ color: palette.primary, fontSize: 'clamp(24px, 6vw, 112px)' }}>
               {formatText(slide.headline)}
             </h2>
           </MotionBlock>
@@ -43,34 +46,47 @@ const ArtistGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
 
         {slide.subheadline && (
           <MotionBlock motionKey="blurResolve" delay={0.2}>
-            <p className="vyb-subtitle opacity-60 mb-6" style={{ color: palette.text }}>
+            <p className="vyb-subtitle opacity-60 mb-6 text-left" style={{ color: palette.text }}>
               {slide.subheadline}
             </p>
           </MotionBlock>
         )}
 
+        {/* #9: Enhanced artist cards with VYB green gradient border */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 md:gap-4">
           {artists.map((artist, i) => (
             <MotionBlock key={artist.name} motionKey="cardRise" delay={0.25 + i * 0.04} custom={i}>
               <motion.div
-                className="glass-card-d2 flex flex-col items-center gap-2"
-                style={{ padding: '12px 16px' }}
+                className="glass-card-d2 flex flex-col items-center gap-2 relative overflow-hidden"
+                style={{
+                  padding: '14px 16px',
+                  borderColor: 'rgba(0, 208, 132, 0.2)',
+                  borderWidth: '1px',
+                  background: 'linear-gradient(135deg, rgba(0,208,132,0.06) 0%, rgba(255,255,255,0.04) 50%, rgba(0,208,132,0.03) 100%)',
+                }}
                 whileHover={{
                   scale: 1.06,
                   y: -4,
-                  borderColor: `${palette.accent}50`,
-                  boxShadow: `0 12px 40px -10px ${palette.accent}30`,
+                  borderColor: 'rgba(0, 208, 132, 0.5)',
+                  boxShadow: '0 12px 40px -10px rgba(0, 208, 132, 0.25)',
                 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               >
-                {/* Artist initial avatar */}
+                {/* Subtle top accent line */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-[2px]"
+                  style={{ background: 'linear-gradient(90deg, transparent, var(--vyb-green), transparent)' }}
+                />
+
+                {/* Artist initial avatar with gradient bg */}
                 <div
                   className="w-10 h-10 rounded-full flex items-center justify-center"
                   style={{
-                    background: 'rgba(255,255,255,0.1)',
+                    background: 'linear-gradient(135deg, rgba(0,208,132,0.3), rgba(0,208,132,0.1))',
                     fontFamily: 'var(--font-mono)',
                     fontSize: '14px',
                     color: '#FFFFFF',
+                    fontWeight: 600,
                   }}
                 >
                   {artist.name.charAt(0)}

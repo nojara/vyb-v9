@@ -5,6 +5,7 @@ import SlideBackground from '@/components/SlideBackground';
 import DimLayer from '@/components/DimLayer';
 import VideoEmbed from '@/components/VideoEmbed';
 import MediaPlaceholder from '@/components/MediaPlaceholder';
+import ScrollArrow from '@/components/ScrollArrow';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
 import { useLanguage } from '@/context/LanguageContext';
 import { formatText } from '@/utils/formatText';
@@ -15,6 +16,7 @@ const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
   const { palette } = slide;
   const hasMedia = slide.media && slide.media.length > 0;
   const hasBg = !!(slide.bgImage || slide.bgVideo);
+  const hasNoVisualAnchor = !hasMedia && !slide.image;
 
   return (
     <div
@@ -22,16 +24,23 @@ const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
     >
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
-      {hasBg && <DimLayer opacity={0.45} mode="gradient" />}
+      {hasBg && <DimLayer opacity={0.5} mode="gradient" />}
 
       <div className="relative z-10 w-full h-full flex items-center">
         <div className="w-full grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-12 items-center max-w-6xl">
-          {/* Text column — left-aligned desktop, centered mobile */}
-          <div className="text-center md:text-left">
+          {/* Text column — left-aligned always, centered on mobile for short text only */}
+          <div className="text-left">
+            {/* #5: Standardized section label */}
             <MotionBlock motionKey="spotlightFade" delay={0}>
               <motion.span
-                className="vyb-label inline-block opacity-40 mb-[var(--space-kicker-to-title)] border-b pb-2 clean-hover"
-                style={{ borderColor: `${palette.text}33`, color: palette.text }}
+                className="vyb-label inline-block opacity-40 border-b pb-2 clean-hover"
+                style={{
+                  borderColor: `${palette.text}33`,
+                  color: palette.text,
+                  letterSpacing: '0.15em',
+                  marginBottom: '16px',
+                  display: 'inline-block',
+                }}
                 whileHover={{ opacity: 0.8 }}
                 transition={{ duration: 0.3 }}
               >
@@ -39,11 +48,16 @@ const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
               </motion.span>
             </MotionBlock>
 
+            {/* #14: Fluid headline that won't overflow */}
             {slide.headline && (
               <MotionBlock motionKey="maskReveal" delay={0.15}>
                 <h2
-                  className="vyb-section-title mb-[var(--space-title-to-subtitle)] text-[length:var(--t-xl)] md:text-[length:var(--fs-section-title)]"
-                  style={{ color: palette.primary, maxWidth: 'var(--mw-title)' }}
+                  className="vyb-section-title mb-[var(--space-title-to-subtitle)]"
+                  style={{
+                    color: palette.primary,
+                    maxWidth: 'var(--mw-title)',
+                    fontSize: 'clamp(24px, 6vw, 112px)',
+                  }}
                 >
                   {formatText(slide.headline)}
                 </h2>
@@ -61,10 +75,11 @@ const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
               </MotionBlock>
             )}
 
+            {/* #4: Body paragraphs always left-aligned */}
             {slide.body?.map((para, i) => (
               <MotionBlock key={i} motionKey="editorialSweep" delay={0.4 + i * 0.15}>
                 <motion.p
-                  className="vyb-body opacity-70 mb-[var(--space-body-to-body)] clean-hover mx-auto md:mx-0"
+                  className="vyb-body opacity-70 mb-[var(--space-body-to-body)] text-left clean-hover"
                   style={{ color: palette.text, maxWidth: 'var(--mw-body)' }}
                   whileHover={{ opacity: 1 }}
                   transition={{ duration: 0.25 }}
@@ -73,6 +88,11 @@ const EditorialLeftSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
                 </motion.p>
               </MotionBlock>
             ))}
+
+            {/* #8: Scroll arrow on text-only sections */}
+            {hasNoVisualAnchor && (
+              <ScrollArrow color={palette.text} delay={0.6 + (slide.body?.length || 0) * 0.15} />
+            )}
           </div>
 
           {/* Media column */}

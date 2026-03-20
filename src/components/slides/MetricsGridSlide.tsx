@@ -19,12 +19,19 @@ const MetricsGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; in
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
     >
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
-      {hasBg && <DimLayer opacity={0.45} />}
+      {hasBg && <DimLayer opacity={0.5} />}
 
       <div className="relative z-10 w-full max-w-6xl">
+        {/* #14: Fluid headline */}
         {slide.headline && (
           <MotionBlock motionKey="heroLift" delay={0}>
-            <h2 className="vyb-section-title mb-[var(--space-kicker-to-title)]" style={{ color: palette.primary }}>
+            <h2
+              className="vyb-section-title mb-[var(--space-kicker-to-title)]"
+              style={{
+                color: palette.primary,
+                fontSize: 'clamp(24px, 6vw, 112px)',
+              }}
+            >
               {formatText(slide.headline)}
             </h2>
           </MotionBlock>
@@ -32,13 +39,14 @@ const MetricsGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; in
 
         {slide.subheadline && (
           <MotionBlock motionKey="blurResolve" delay={0.1}>
-            <p className="vyb-subtitle opacity-70 mb-12" style={{ color: palette.text }}>
+            <p className="vyb-subtitle opacity-70 mb-12 text-left" style={{ color: palette.text }}>
               {slide.subheadline}
             </p>
           </MotionBlock>
         )}
 
-        <div className="grid grid-cols-2 gap-4 md:gap-8 mb-6 md:mb-10">
+        {/* #7: Equal height metric cards */}
+        <div className="grid grid-cols-2 gap-4 md:gap-8 mb-6 md:mb-10 items-stretch">
           {slide.stats?.map((stat, i) => (
             <CountUpMetric
               key={i}
@@ -52,9 +60,10 @@ const MetricsGridSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; in
           ))}
         </div>
 
+        {/* #4: Body text left-aligned */}
         {slide.body?.map((para, i) => (
           <MotionBlock key={i} motionKey="paragraphUnfold" delay={0.8 + i * 0.1} className="mt-6">
-            <p className="vyb-body-sm opacity-50 max-w-3xl text-center mx-auto" style={{ color: palette.text }}>
+            <p className="vyb-body-sm opacity-50 max-w-3xl text-left" style={{ color: palette.text }}>
               {formatText(para)}
             </p>
           </MotionBlock>

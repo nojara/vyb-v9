@@ -42,12 +42,12 @@ export const slideThemeMap: Record<ThemeKey, ThemeTokens> = {
     palette: { bg: '#0000FF', primary: '#FFFFFF', accent: '#A9ED3D', text: '#FFFFFF' },
   },
   yellow: {
-    bgClass: 'bg-[linear-gradient(135deg,#FFFF00_0%,#F1DD33_100%)]',
-    textClass: 'text-neutral-950',
-    subClass: 'text-neutral-950/75',
-    cardClass: 'border-black/10 bg-white/30',
-    lineClass: 'bg-neutral-950/18',
-    palette: { bg: '#FFFF00', primary: '#0A0A0A', accent: '#0000FF', text: '#0A0A0A' },
+    bgClass: 'bg-[linear-gradient(135deg,#1A1800_0%,#2A2400_100%)]',
+    textClass: 'text-white',
+    subClass: 'text-white/78',
+    cardClass: 'border-[#F5E600]/15 bg-white/[0.08]',
+    lineClass: 'bg-[#F5E600]/18',
+    palette: { bg: '#1A1800', primary: '#F5E600', accent: '#A9ED3D', text: '#FFFFFF' },
   },
   teal: {
     bgClass: 'bg-[linear-gradient(135deg,#3CB46A_0%,#1A7A3D_100%)]',

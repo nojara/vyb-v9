@@ -90,17 +90,28 @@
     --ls-label: 0.14em;
     --ls-mono: 0.12em;
 
-    /* === Fluid type scale === */
-    --fs-hero: clamp(2.75rem, 7vw, 7rem);
-    --fs-section-title: clamp(1.95rem, 4.4vw, 4.25rem);
-    --fs-subtitle: clamp(1rem, 1.5vw, 1.45rem);
-    --fs-body-lg: clamp(1.04rem, 1.2vw, 1.24rem);
-    --fs-body: clamp(0.95rem, 0.98vw, 1.08rem);
-    --fs-body-sm: clamp(0.84rem, 0.86vw, 0.95rem);
-    --fs-label: clamp(0.68rem, 0.72vw, 0.78rem);
-    --fs-mono-ui: clamp(0.68rem, 0.72vw, 0.8rem);
-    --fs-metric: clamp(1.65rem, 2.8vw, 3rem);
-    --fs-slide-number: clamp(0.7rem, 0.9vw, 0.9rem);
+    /* === Fluid type scale — single clamp() source, no breakpoint overrides === */
+    --t-xs:   clamp(10px, 1.2vw, 12px);
+    --t-sm:   clamp(12px, 1.4vw, 14px);
+    --t-base: clamp(14px, 1.6vw, 16px);
+    --t-md:   clamp(16px, 2vw, 20px);
+    --t-lg:   clamp(20px, 2.5vw, 28px);
+    --t-xl:   clamp(28px, 4vw, 48px);
+    --t-2xl:  clamp(40px, 6vw, 72px);
+    --t-3xl:  clamp(56px, 9vw, 112px);
+    --t-hero: clamp(72px, 13vw, 160px);
+
+    /* === Mapped aliases (consumed by .vyb-* utility classes) === */
+    --fs-hero: var(--t-hero);
+    --fs-section-title: var(--t-3xl);
+    --fs-subtitle: var(--t-md);
+    --fs-body-lg: var(--t-md);
+    --fs-body: var(--t-base);
+    --fs-body-sm: var(--t-sm);
+    --fs-label: var(--t-xs);
+    --fs-mono-ui: var(--t-xs);
+    --fs-metric: var(--t-xl);
+    --fs-slide-number: var(--t-xs);
 
     /* === Weights === */
     --fw-display: 800;
@@ -154,33 +165,14 @@
     --mw-body: 52ch;
   }
 
+  /* Font-size breakpoint overrides removed — clamp() handles all viewports.
+     Only non-font spacing overrides remain for mobile safe areas. */
   @media (max-width: 767px) {
     :root {
-      --fs-hero: clamp(2.2rem, 10vw, 4rem);
-      --fs-section-title: clamp(1.6rem, 7vw, 2.6rem);
-      --fs-subtitle: clamp(0.96rem, 4.1vw, 1.08rem);
-      --fs-body-lg: clamp(0.98rem, 3.9vw, 1.08rem);
-      --fs-body: clamp(0.92rem, 3.6vw, 1rem);
-      --fs-body-sm: 0.83rem;
-      --fs-label: 0.66rem;
-      --fs-mono-ui: 0.66rem;
-      --fs-metric: clamp(1.35rem, 6vw, 2.2rem);
-
       --safe-top: 16px;
       --safe-right: 16px;
       --safe-bottom: 20px;
       --safe-left: 16px;
-    }
-  }
-
-  @media (min-width: 1440px) {
-    :root {
-      --fs-hero: clamp(4.25rem, 5.5vw, 8rem);
-      --fs-section-title: clamp(2.4rem, 3.3vw, 4.8rem);
-      --fs-subtitle: 1.4rem;
-      --fs-body-lg: 1.18rem;
-      --fs-body: 1.05rem;
-      --fs-metric: 3.2rem;
     }
   }
 }

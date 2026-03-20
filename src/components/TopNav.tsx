@@ -7,6 +7,7 @@ import { SLIDES } from '@/data/slides';
 interface TopNavProps {
   activeId: string;
   palette: { bg: string; primary: string; text: string; accent: string };
+  onNavigate?: (slideId: string) => void;
 }
 
 /** Key navigation anchors mapped to slide IDs */

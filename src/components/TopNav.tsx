@@ -1,14 +1,36 @@
+import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Menu, X } from 'lucide-react';
+import { SLIDES } from '@/data/slides';
 
 interface TopNavProps {
   activeId: string;
   palette: { bg: string; primary: string; text: string; accent: string };
 }
 
+/** Key navigation anchors mapped to slide IDs */
+const NAV_SECTIONS = [
+  { label: 'About', id: 'S02' },
+  { label: 'Format', id: 'S05' },
+  { label: 'Distribution', id: 'S18' },
+  { label: 'Artists', id: 'S28' },
+  { label: 'Partners', id: 'S27' },
+  { label: 'Contact', id: 'S34' },
+];
+
 const TopNav = ({ activeId, palette }: TopNavProps) => {
   const { lang, toggle } = useLanguage();
+  const [menuOpen, setMenuOpen] = useState(false);
   const filterClass = 'brightness-0 invert';
+
+  const scrollToSlide = (slideId: string) => {
+    const el = document.querySelector(`[data-slide-id="${slideId}"]`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+      setMenuOpen(false);
+    }
+  };
 
   return (
     <header
@@ -41,7 +63,7 @@ const TopNav = ({ activeId, palette }: TopNavProps) => {
           />
         </div>
 
-        {/* Right: Elevate logo + EN/AR toggle */}
+        {/* Right: Elevate + Language toggle + Hamburger */}
         <div className="flex-shrink-0 flex items-center gap-2 md:gap-4">
           <img
             src="https://elevate-it.com/wp-content/uploads/2024/10/Elvete-logo-2-2048x333.png"
@@ -56,12 +78,11 @@ const TopNav = ({ activeId, palette }: TopNavProps) => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             aria-label={lang === 'en' ? 'Switch to Arabic' : 'Switch to English'}
-            className="ml-auto flex items-center rounded-full border px-1.5 md:px-2 py-0.5 cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="flex items-center rounded-full border px-1.5 md:px-2 py-0.5 cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             style={{ borderColor: palette.primary }}
           >
             <span
               className="vyb-ui-mono text-[9px] md:text-[10px] font-bold px-1 md:px-1.5 py-0.5 rounded-full transition-all duration-300"
-              aria-hidden="true"
               style={{
                 backgroundColor: lang === 'en' ? palette.primary : 'transparent',
                 color: lang === 'en' ? palette.bg : `${palette.text}88`,
@@ -71,7 +92,6 @@ const TopNav = ({ activeId, palette }: TopNavProps) => {
             </span>
             <span
               className="vyb-ui-mono text-[9px] md:text-[10px] font-bold px-1 md:px-1.5 py-0.5 rounded-full transition-all duration-300"
-              aria-hidden="true"
               style={{
                 backgroundColor: lang === 'ar' ? palette.primary : 'transparent',
                 color: lang === 'ar' ? palette.bg : `${palette.text}88`,
@@ -80,8 +100,58 @@ const TopNav = ({ activeId, palette }: TopNavProps) => {
               AR
             </span>
           </motion.button>
+
+          {/* #11: Hamburger menu */}
+          <motion.button
+            onClick={() => setMenuOpen(!menuOpen)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Open navigation menu"
+            className="flex items-center justify-center w-8 h-8 rounded-full border cursor-pointer"
+            style={{ borderColor: `${palette.primary}55` }}
+          >
+            {menuOpen ? <X size={14} /> : <Menu size={14} />}
+          </motion.button>
         </div>
       </nav>
+
+      {/* #11: Dropdown navigation menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+            className="absolute top-full mt-2 right-4 md:right-auto md:left-1/2 md:-translate-x-1/2 pointer-events-auto rounded-2xl overflow-hidden"
+            style={{
+              background: 'rgba(0, 0, 0, 0.88)',
+              backdropFilter: 'blur(30px)',
+              WebkitBackdropFilter: 'blur(30px)',
+              border: '1px solid rgba(255, 255, 255, 0.12)',
+              boxShadow: '0 24px 60px rgba(0,0,0,0.5)',
+              minWidth: '200px',
+            }}
+          >
+            {NAV_SECTIONS.map((section, i) => (
+              <motion.button
+                key={section.id}
+                onClick={() => scrollToSlide(section.id)}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.05 }}
+                className="w-full text-left px-6 py-3 vyb-ui-mono text-[11px] transition-colors hover:bg-white/10"
+                style={{
+                  color: activeId === section.id ? palette.primary : 'rgba(255,255,255,0.6)',
+                  borderBottom: i < NAV_SECTIONS.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                }}
+              >
+                {section.label}
+              </motion.button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

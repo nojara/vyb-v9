@@ -19,14 +19,19 @@ const PortraitSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
   return (
     <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
-      {hasBg && <DimLayer opacity={0.45} />}
+      {hasBg && <DimLayer opacity={0.5} />}
 
       <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
         <div>
+          {/* #5: Standardized section label */}
           <MotionBlock motionKey="spotlightFade" delay={0}>
             <motion.span
-              className="vyb-label opacity-40 mb-[var(--space-kicker-to-title)] block"
-              style={{ color: palette.text }}
+              className="vyb-label opacity-40 block"
+              style={{
+                color: palette.text,
+                letterSpacing: '0.15em',
+                marginBottom: '16px',
+              }}
               whileHover={{ opacity: 0.8, x: 3 }}
             >
               {slide.section}
@@ -37,7 +42,11 @@ const PortraitSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
             <MotionBlock motionKey="heroLift" delay={0.15}>
               <h2
                 className="vyb-section-title mb-[var(--space-title-to-subtitle)]"
-                style={{ color: palette.primary, maxWidth: 'var(--mw-title)' }}
+                style={{
+                  color: palette.primary,
+                  maxWidth: 'var(--mw-title)',
+                  fontSize: 'clamp(24px, 6vw, 112px)',
+                }}
               >
                 {formatText(slide.headline)}
               </h2>
@@ -52,10 +61,11 @@ const PortraitSplitSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; 
             </MotionBlock>
           )}
 
+          {/* #4: Body text left-aligned */}
           {slide.body?.map((para, i) => (
             <MotionBlock key={i} motionKey="editorialSweep" delay={0.4 + i * 0.15}>
               <motion.p
-                className="vyb-body opacity-70 mb-[var(--space-body-to-body)]"
+                className="vyb-body opacity-70 mb-[var(--space-body-to-body)] text-left"
                 style={{ color: palette.text, maxWidth: 'var(--mw-body)' }}
                 whileHover={{ opacity: 1, x: 3 }}
                 transition={{ duration: 0.25 }}

@@ -23,7 +23,6 @@ const SlideBackground = ({ bgImage, videoSrc, index, textColor }: SlideBackgroun
   const blendMode = isDarkText ? 'mix-blend-multiply' : 'mix-blend-screen';
   const shapeOpacity = isDarkText ? 'opacity-15' : 'opacity-25';
 
-  // Mouse-driven parallax values (desktop only, disabled for reduced motion)
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springX = useSpring(mouseX, { stiffness: 40, damping: 20 });
@@ -53,13 +52,13 @@ const SlideBackground = ({ bgImage, videoSrc, index, textColor }: SlideBackgroun
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Layer 0: Base image — no scale animation for reduced motion */}
+          {/* Layer 0: Base image — 100vw×100vh cover */}
           {prefersReduced ? (
             <img
               src={bgImage}
               alt=""
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-              style={{ opacity: isDarkText ? 0.2 : 0.3 }}
+              style={{ opacity: isDarkText ? 0.15 : 0.25 }}
               loading="lazy"
             />
           ) : (
@@ -67,7 +66,7 @@ const SlideBackground = ({ bgImage, videoSrc, index, textColor }: SlideBackgroun
               src={bgImage}
               alt=""
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-              style={{ opacity: isDarkText ? 0.2 : 0.3 }}
+              style={{ opacity: isDarkText ? 0.15 : 0.25 }}
               initial={{ scale: 1.15 }}
               whileInView={{ scale: 1.02 }}
               viewport={{ once: true }}
@@ -76,7 +75,7 @@ const SlideBackground = ({ bgImage, videoSrc, index, textColor }: SlideBackgroun
             />
           )}
 
-          {/* Layer 1: Parallax depth duplicate (desktop only, no reduced motion) */}
+          {/* Layer 1: Parallax depth duplicate (desktop only) */}
           {!isMobile && !prefersReduced && (
             <motion.img
               src={bgImage}
@@ -91,13 +90,13 @@ const SlideBackground = ({ bgImage, videoSrc, index, textColor }: SlideBackgroun
             />
           )}
 
-          {/* Layer 2: Editorial gradient overlays */}
+          {/* #3: Strong dark overlay for text readability on patterned backgrounds */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
               background: isDarkText
-                ? 'radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(0,0,0,0.15) 100%), linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 40%, rgba(0,0,0,0.2) 100%)'
-                : 'radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(0,0,0,0.4) 100%), linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 40%, rgba(0,0,0,0.5) 100%)',
+                ? 'radial-gradient(ellipse at 50% 40%, transparent 20%, rgba(0,0,0,0.25) 100%), linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 40%, rgba(0,0,0,0.3) 100%)'
+                : 'radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.55) 100%), linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.6) 100%)',
             }}
           />
         </div>

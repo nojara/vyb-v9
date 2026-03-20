@@ -9,6 +9,7 @@ import { useMouseParallax } from '@/hooks/useMouseParallax';
 import { useTranslatedSlide } from '@/hooks/useTranslatedSlide';
 import { useLanguage } from '@/context/LanguageContext';
 import { formatText } from '@/utils/formatText';
+import { ChevronDown } from 'lucide-react';
 
 const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index: number }) => {
   const slide = useTranslatedSlide(rawSlide);
@@ -19,11 +20,11 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
   const hasBg = !!(slide.bgImage || slide.bgVideo);
 
   return (
-    <div ref={containerRef} className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-8 pt-24 pb-24 no-glitch" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div ref={containerRef} className="relative w-full h-full flex flex-col items-center justify-center text-center px-5 md:px-8 pt-24 pb-24 no-glitch overflow-hidden" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <SlideBackground bgImage={slide.bgImage} videoSrc={slide.bgVideo} index={index} textColor={palette.text} />
       {hasBg && <DimLayer opacity={0.45} mode="gradient" />}
 
-      <div className="relative z-10">
+      <div className="relative z-10 w-full max-w-[90vw] flex flex-col items-center">
         {/* Floating accent orb */}
         <motion.div
           className="absolute -top-24 -right-32 w-64 h-64 rounded-full pointer-events-none opacity-20 blur-[80px]"
@@ -43,10 +44,17 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
           </motion.span>
         </MotionBlock>
 
+        {/* #1 #2 #14: Hero title — fluid, centered, no overflow */}
         <MotionBlock motionKey="heroLift" delay={0.4}>
           <motion.h1
-            className="vyb-hero-title"
-            style={{ color: palette.primary, maxWidth: 'var(--mw-hero)' }}
+            className="vyb-hero-title text-center w-full"
+            style={{
+              color: palette.primary,
+              fontSize: 'clamp(40px, 10vw, 160px)',
+              maxWidth: '100%',
+              overflowWrap: 'break-word',
+              wordBreak: 'break-word',
+            }}
             animate={{ x: mouse.x * 0.4, y: mouse.y * 0.3 }}
             transition={{ type: 'spring', stiffness: 80, damping: 40 }}
           >
@@ -78,22 +86,17 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
           />
         </div>
 
+        {/* #12: Changed swipe hint to scroll with down arrow */}
         <MotionBlock motionKey="ctaBreathe" delay={0.9} className="mt-[var(--space-body-to-cta)]">
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-            className="vyb-ui-mono opacity-50 hidden md:block"
+            className="vyb-ui-mono opacity-50 flex items-center gap-2"
             style={{ color: palette.text }}
           >
-            ↓ SCROLL TO EXPLORE
-          </motion.div>
-          <motion.div
-            animate={{ x: [0, 12, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-            className="vyb-ui-mono opacity-50 md:hidden text-[10px]"
-            style={{ color: palette.text }}
-          >
-            ← SWIPE →
+            <ChevronDown size={14} />
+            SCROLL TO EXPLORE
+            <ChevronDown size={14} />
           </motion.div>
         </MotionBlock>
       </div>

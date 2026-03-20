@@ -18,6 +18,21 @@ const BottomPagination = ({ activeId, palette, progress }: BottomPaginationProps
       aria-live="polite"
       aria-label={`Slide ${activeIndex} of ${SLIDES.length}`}
     >
+      {/* #6: "SLIDE" label for clarity */}
+      <span
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: '9px',
+          fontWeight: 600,
+          color: 'rgba(255,255,255,0.25)',
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+        }}
+        aria-hidden="true"
+      >
+        SLIDE
+      </span>
+
       {/* Compact animated counter */}
       <AnimatePresence mode="wait">
         <motion.span

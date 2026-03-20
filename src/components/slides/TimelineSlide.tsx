@@ -10,10 +10,13 @@ const TimelineSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; index
   const { palette } = slide;
 
   return (
-    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-20 pb-16" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="relative w-full h-full flex items-center px-5 md:px-24 pt-24 pb-24" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="w-full max-w-5xl">
         <AnimatedBlock slideIndex={index} delay={0}>
-          <span className="vyb-label opacity-40 mb-[var(--space-kicker-to-title)] block" style={{ color: palette.text }}>
+          <span
+            className="vyb-label inline-block opacity-40"
+            style={{ color: palette.text, letterSpacing: '0.15em', marginBottom: '16px', display: 'inline-block' }}
+          >
             {slide.section}
           </span>
         </AnimatedBlock>

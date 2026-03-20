@@ -17,20 +17,37 @@
 
 @layer base {
   :root {
-    /* === Brand tokens === */
+    /* === Brand Colors === */
     --vyb-yellow: #F5E600;
-    --vyb-blue: #1E2FFF;
     --vyb-teal: #00BFB3;
     --vyb-lime: #C6F135;
-    --vyb-cyan: #29C8E8;
-    --vyb-black: #0A0A0A;
     --vyb-coral: #E8526A;
-    --vyb-white: #FFFFFF;
+    --vyb-cyan: #29C8E8;
+    --vyb-green: #00D084;
+    --vyb-orange: #FF8040;
+    --vyb-red: #FF3B3B;
 
-    /* === Global semantic tokens === */
+    /* === Surfaces === */
+    --bg: #060606;
+    --surface: #0d0d0d;
+    --card: #111111;
+    --border: rgba(255,255,255,0.07);
+
+    /* === Text === */
+    --text: #E2DDD4;
+    --muted: #888888;
+    --muted-2: #555555;
+
+    /* === Typography === */
+    --font-display: 'Neuething', 'Syne', sans-serif;
+    --font-body: 'Manrope', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --font-ar: 'Tajawal', 'Noto Sans Arabic', sans-serif;
+
+    /* === Shadcn semantic tokens (HSL) === */
     --background: 0 0% 2%;
     --foreground: 40 33% 97%;
-    --card: 0 0% 5%;
+    --card-hsl: 0 0% 5%;
     --card-foreground: 40 33% 97%;
     --popover: 0 0% 5%;
     --popover-foreground: 40 33% 97%;
@@ -38,13 +55,13 @@
     --primary-foreground: 0 0% 100%;
     --secondary: 86 82% 59%;
     --secondary-foreground: 0 0% 0%;
-    --muted: 0 0% 15%;
+    --muted-hsl: 0 0% 15%;
     --muted-foreground: 0 0% 64%;
     --accent: 86 82% 59%;
     --accent-foreground: 0 0% 0%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 15%;
+    --border-hsl: 0 0% 15%;
     --input: 0 0% 15%;
     --ring: 0 82% 49%;
 
@@ -53,33 +70,14 @@
     --vyb-radius-card: 24px;
     --vyb-radius-chip: 999px;
 
-    /* === Glass / borders / shadows === */
+    /* === Glass / shadows === */
     --vyb-border-dark: rgba(0, 0, 0, 0.14);
     --vyb-border-light: rgba(255, 255, 255, 0.18);
-
     --vyb-glass-light: rgba(255, 255, 255, 0.06);
     --vyb-glass-dark: rgba(0, 0, 0, 0.28);
-
-    --vyb-shadow-soft:
-      0 24px 80px rgba(0, 0, 0, 0.28),
-      0 10px 28px rgba(0, 0, 0, 0.18);
-
-    --vyb-shadow-card:
-      0 20px 60px rgba(0, 0, 0, 0.30),
-      0 6px 16px rgba(0, 0, 0, 0.16);
-
+    --vyb-shadow-soft: 0 24px 80px rgba(0,0,0,0.28), 0 10px 28px rgba(0,0,0,0.18);
+    --vyb-shadow-card: 0 20px 60px rgba(0,0,0,0.30), 0 6px 16px rgba(0,0,0,0.16);
     --vyb-noise-opacity: 0.035;
-
-    /* === Fonts === */
-    --font-display: "Neuething", "Syne", system-ui, sans-serif;
-    --font-body: "Manrope", system-ui, sans-serif;
-    --font-ar: "Tajawal", "Noto Sans Arabic", sans-serif;
-    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-
-    --f-display: var(--font-display);
-    --f-sans: var(--font-body);
-    --f-mono: var(--font-mono);
-    --f-arabic: var(--font-ar);
 
     /* === Line heights === */
     --lh-display: 0.92;

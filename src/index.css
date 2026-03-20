@@ -27,16 +27,16 @@
     --vyb-orange: #FF8040;
     --vyb-red: #FF3B3B;
 
-    /* === Surfaces === */
-    --bg: #060606;
-    --surface: #0d0d0d;
-    --card: #111111;
-    --border: rgba(255,255,255,0.07);
+    /* === Surfaces (hex — use directly in components) === */
+    --vyb-bg: #060606;
+    --vyb-surface: #0d0d0d;
+    --vyb-card: #111111;
+    --vyb-border: rgba(255,255,255,0.07);
 
-    /* === Text === */
-    --text: #E2DDD4;
-    --muted: #888888;
-    --muted-2: #555555;
+    /* === Text (hex — use directly in components) === */
+    --vyb-text: #E2DDD4;
+    --vyb-muted: #888888;
+    --vyb-muted-2: #555555;
 
     /* === Typography === */
     --font-display: 'Neuething', 'Syne', sans-serif;
@@ -44,10 +44,10 @@
     --font-mono: 'IBM Plex Mono', monospace;
     --font-ar: 'Tajawal', 'Noto Sans Arabic', sans-serif;
 
-    /* === Shadcn semantic tokens (HSL) === */
+    /* === Shadcn semantic tokens (HSL — consumed by tailwind.config) === */
     --background: 0 0% 2%;
     --foreground: 40 33% 97%;
-    --card-hsl: 0 0% 5%;
+    --card: 0 0% 5%;
     --card-foreground: 40 33% 97%;
     --popover: 0 0% 5%;
     --popover-foreground: 40 33% 97%;
@@ -55,13 +55,13 @@
     --primary-foreground: 0 0% 100%;
     --secondary: 86 82% 59%;
     --secondary-foreground: 0 0% 0%;
-    --muted-hsl: 0 0% 15%;
+    --muted: 0 0% 15%;
     --muted-foreground: 0 0% 64%;
     --accent: 86 82% 59%;
     --accent-foreground: 0 0% 0%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-    --border-hsl: 0 0% 15%;
+    --border: 0 0% 15%;
     --input: 0 0% 15%;
     --ring: 0 82% 49%;
 

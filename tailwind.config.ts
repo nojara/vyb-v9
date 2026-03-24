@@ -85,9 +85,9 @@ export default {
         vyb: "var(--vyb-shadow-soft)",
       },
       fontFamily: {
-        display: ["Neuething", "system-ui", "sans-serif"],
-        body: ["Neuething", "system-ui", "sans-serif"],
-        arabic: ["Tajawal", "Noto Sans Arabic", "sans-serif"],
+        display: ["Adieu", "Syne", "system-ui", "sans-serif"],
+        body: ["Manrope", "system-ui", "sans-serif"],
+        arabic: ["IBM Plex Sans Arabic", "Noto Sans Arabic", "sans-serif"],
         mono: ["IBM Plex Mono", "ui-monospace", "monospace"],
       },
       keyframes: {

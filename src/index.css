@@ -67,10 +67,10 @@
     --vyb-muted-2: #555555;
 
     /* === Typography === */
-    --font-display: 'Neuething', 'Syne', sans-serif;
+    --font-display: 'Adieu', 'Syne', sans-serif;
     --font-body: 'Manrope', sans-serif;
     --font-mono: 'IBM Plex Mono', monospace;
-    --font-ar: 'Tajawal', 'Noto Sans Arabic', sans-serif;
+    --font-ar: 'IBM Plex Sans Arabic', 'Noto Sans Arabic', sans-serif;
 
     /* === Shadcn semantic tokens (HSL — consumed by tailwind.config) === */
     --background: 0 0% 2%;

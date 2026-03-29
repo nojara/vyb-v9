@@ -57,13 +57,13 @@ const LoaderScreen = ({ onStart }: LoaderScreenProps) => {
               className="type-display mb-6 md:mb-8 tracking-[-0.08em]"
               style={{ color: '#fff', fontSize: 'clamp(1.8rem, 8vw, 7rem)', maxWidth: '100%', overflowWrap: 'break-word' }}
             >
-              {formatText(lang === 'ar' ? 'جلسات Vyb الحيّة' : 'Vyb SESSIONS')}
+              {formatText(lang === 'ar' ? 'Mobily Vyb' : 'Mobily Vyb')}
             </h1>
             <p
               className="type-subtitle italic max-w-2xl mx-auto text-[clamp(0.85rem,3.5vw,1.5rem)]"
               style={{ color: 'rgba(255,255,255,0.6)' }}
             >
-              {formatText(lang === 'ar' ? 'صوت الطاقة الإقليمية.' : 'The Sound of Regional Energy.')}
+              {formatText(lang === 'ar' ? 'لحظات بهجة يومية من خلال الموسيقى.' : 'Inspiring everyday moments of delight through music.')}
             </p>
           </motion.div>
         </div>
@@ -100,7 +100,7 @@ const LoaderScreen = ({ onStart }: LoaderScreenProps) => {
             RIYADH, KSA
           </span>
           <span className="vyb-ui-mono text-[7px] md:text-[9px]" style={{ color: '#fff' }}>
-            MOBILY × NOJARA STUDIOS × ELEVATE
+            MOBILY Vyb
           </span>
         </div>
       </div>

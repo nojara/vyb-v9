@@ -76,14 +76,8 @@ const TopNav = ({ activeId, palette, onNavigate }: TopNavProps) => {
           />
         </button>
 
-        {/* Right: Elevate + Language toggle + Hamburger */}
+        {/* Right: Language toggle + Hamburger */}
         <div className="flex-shrink-0 flex items-center gap-2 md:gap-4">
-          <img
-            src="https://elevate-it.com/wp-content/uploads/2024/10/Elvete-logo-2-2048x333.png"
-            alt="Elevate"
-            className="h-2 md:h-4 w-auto object-contain"
-            style={{ filter: `brightness(0) invert(1) drop-shadow(0 0 8px ${palette.primary})` }}
-          />
 
           {/* Language toggle */}
           <motion.button

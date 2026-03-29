@@ -40,7 +40,7 @@ const HeroCenterSlide = ({ slide: rawSlide, index }: { slide: ComputedSlide; ind
             whileHover={{ scale: 1.05, borderColor: `${palette.primary}88` }}
             transition={{ duration: 0.3 }}
           >
-            {slide.body?.[0] || 'MOBILY × NOJARA STUDIOS × ELEVATE'}
+            {slide.body?.[0] || 'MOBILY Vyb'}
           </motion.span>
         </MotionBlock>
 

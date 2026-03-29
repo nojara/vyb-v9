@@ -101,7 +101,7 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
         className="relative w-full h-full overflow-y-auto snap-y snap-mandatory"
         style={{ scrollbarWidth: 'none', zIndex: 1 }}
       >
-        {/* ─── Section 0: Elevate Logo ─── */}
+        {/* ─── Section 0: Mobily × Nojara Studios ─── */}
         <section
           data-intro-section="0"
           className="relative w-full flex flex-col items-center justify-center gap-10 md:gap-14 snap-start snap-always"
@@ -114,12 +114,7 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
               transition={{ duration: 1.3, delay: 0.35, ease }}
               className="relative"
             >
-              <img
-                src="https://elevate-it.com/wp-content/uploads/2024/10/Elvete-logo-2-2048x333.png"
-                alt="Elevate"
-                className="w-[120px] md:w-[220px] h-auto object-contain"
-                style={{ filter: 'brightness(0) invert(1)' }}
-              />
+              <span className="font-display text-white text-2xl md:text-4xl font-bold tracking-[0.15em] uppercase">MOBILY</span>
               <div
                 className="absolute -inset-4 -z-10 rounded-full opacity-20 blur-2xl"
                 style={{ backgroundColor: 'var(--vyb-cyan)' }}
@@ -145,7 +140,7 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
             >
               <img
                 src="https://static.wixstatic.com/media/227dff_d4d02dbb309a4982990c4a17aadfe4b2~mv2.png"
-                alt="Nojara"
+                alt="Nojara Studios"
                 className="w-[120px] md:w-[220px] h-auto object-contain"
                 style={{ filter: 'brightness(0) invert(1)' }}
               />

@@ -14,7 +14,7 @@ export const SLIDE_ASSETS: Record<string, SlideAsset> = {
 
 /** Logos config — fill in URLs when available */
 export const LOGOS = {
-  elevate: '', // Elevate logo URL
+  nojara: '', // Nojara Studios logo URL
   nojara: '', // Nojara logo URL
   mobily: '', // Mobily logo URL
 };

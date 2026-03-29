@@ -15,7 +15,7 @@ const HeroSlide = ({ slide, index }: { slide: ComputedSlide; index: number }) =>
           className="vyb-label inline-block px-6 py-2 rounded-full backdrop-blur-md border"
           style={{ borderColor: `${palette.primary}55`, color: palette.primary }}
         >
-          {slide.body?.[0] || 'MOBILY × NOJARA STUDIOS × ELEVATE'}
+          {slide.body?.[0] || 'MOBILY Vyb'}
         </span>
       </AnimatedBlock>
 

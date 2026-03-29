@@ -100,7 +100,7 @@ const LoaderScreen = ({ onStart }: LoaderScreenProps) => {
             RIYADH, KSA
           </span>
           <span className="vyb-ui-mono text-[7px] md:text-[9px]" style={{ color: '#fff' }}>
-            MOBILY × NOJARA STUDIOS × ELEVATE
+            MOBILY Vyb
           </span>
         </div>
       </div>

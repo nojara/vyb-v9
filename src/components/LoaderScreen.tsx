@@ -63,7 +63,7 @@ const LoaderScreen = ({ onStart }: LoaderScreenProps) => {
               className="type-subtitle italic max-w-2xl mx-auto text-[clamp(0.85rem,3.5vw,1.5rem)]"
               style={{ color: 'rgba(255,255,255,0.6)' }}
             >
-              {formatText(lang === 'ar' ? 'صوت الطاقة الإقليمية.' : 'The Sound of Regional Energy.')}
+              {formatText(lang === 'ar' ? 'لحظات بهجة يومية من خلال الموسيقى.' : 'Inspiring everyday moments of delight through music.')}
             </p>
           </motion.div>
         </div>

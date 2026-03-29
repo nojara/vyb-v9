@@ -84,42 +84,29 @@ const RAW_SLIDES: SlideData[] = [
   {
     id: 'S01', section: 'Opening', layout: 'heroCenter', theme: 'heroDark',
     headline: 'Mobily Vyb',
-    subheadline: 'Inspiring everyday moments of delight through music.',
-    body: ['2 artists. 20 super fans. 1 new track.'],
+    subheadline: '2 artists. 20 super fans. 1 new track.',
+    body: [
+      'A Mobily music format where artists and fans create a song together, live.',
+      'Each episode is built as a moment of delight:\nunexpected, social, emotional, and made to spread.',
+    ],
     bgVideo: 'https://video.wixstatic.com/video/227dff_7f7c423a84884c0a867fc981370f9f93/720p/mp4/file.mp4',
     textBlocks: [
       { type: 'headline', content: 'Mobily Vyb', motion: 'heroLift' },
-      { type: 'subheader', content: 'Inspiring everyday moments of delight through music.', motion: 'blurResolve' },
+      { type: 'subheader', content: '2 artists. 20 super fans. 1 new track.', motion: 'blurResolve' },
       { type: 'caption', content: '↓ SCROLL TO EXPLORE', motion: 'spotlightFade' },
     ],
   },
 
-  // ═══ S02 — OPENING DETAIL ═══
+  // ═══ S02 — WHY THIS MATTERS ═══
   {
-    id: 'S02', section: 'Opening', layout: 'editorialLeft', theme: 'blue',
-    bgImage: 'https://static.wixstatic.com/media/227dff_1d33f15c8a944a9d8d7b1678fa0d43a2~mv2.png',
-    headline: 'Mobily Vyb',
-    body: [
-      'A Mobily music format where artists and fans create a song together, live.',
-      'Each episode is built as a moment of delight: unexpected, social, emotional, and made to spread.',
-    ],
-    textBlocks: [
-      { type: 'kicker', content: 'Opening', motion: 'spotlightFade' },
-      { type: 'headline', content: 'Mobily Vyb', motion: 'maskReveal' },
-      { type: 'body', content: 'A Mobily music format where artists and fans create a song together, live.', motion: 'editorialSweep' },
-    ],
-  },
-
-  // ═══ S03 — WHY THIS MATTERS ═══
-  {
-    id: 'S03', section: 'Why This Matters', layout: 'manifesto', theme: 'darkEditorial',
+    id: 'S02', section: 'Why This Matters', layout: 'manifesto', theme: 'darkEditorial',
     headline: 'WHY THIS MATTERS',
     bgImage: 'https://static.wixstatic.com/media/227dff_f00889dcf0e1443185e8ba399fcc7d80~mv2.gif',
     body: [
       'Young audiences no longer want to stand outside culture and watch it happen.',
-      'They want: access, participation, proximity, a role in the story.',
+      'They want:\naccess\nparticipation\nproximity\na role in the story',
       'At the same time, brands are fighting for relevance in a space that moves fast and forgets faster.',
-      'Mobily can answer both problems with one move: not by sponsoring music culture from a distance, but by building a format that creates it.',
+      'Mobily can answer both problems with one move:\nnot by sponsoring music culture from a distance,\nbut by building a format that creates it.',
     ],
     textBlocks: [
       { type: 'headline', content: 'WHY THIS MATTERS', motion: 'statementDrop' },
@@ -127,16 +114,16 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S04 — BRAND PURPOSE ═══
+  // ═══ S03 — BRAND PURPOSE ═══
   {
-    id: 'S04', section: 'Brand Purpose', layout: 'editorialLeft', theme: 'teal',
+    id: 'S03', section: 'Brand Purpose', layout: 'editorialLeft', theme: 'teal',
     bgImage: 'https://static.wixstatic.com/media/227dff_9ce0fae6211841f99404991888b212aa~mv2.png',
     headline: 'INSPIRING EVERYDAY MOMENTS OF DELIGHT',
-    subheadline: 'Mobily\'s brand purpose turned into experience.',
+    subheadline: 'Mobily\'s brand purpose is to inspire everyday moments of delight.',
     body: [
       'Music is one of the clearest ways to deliver that promise. It lives in daily routines, friendships, fandom, identity, and self-expression.',
       'Mobily Vyb turns that purpose into a branded entertainment experience.',
-      'Each episode becomes a designed moment of delight: a new encounter, a live collaboration, a fresh track, and a story people want to share.',
+      'Each episode becomes a designed moment of delight:\na new encounter, a live collaboration, a fresh track, and a story people want to share.',
     ],
     textBlocks: [
       { type: 'kicker', content: 'Brand Purpose', motion: 'spotlightFade' },
@@ -145,17 +132,20 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S05 — COMMUNICATION OBJECTIVE ═══
+  // ═══ S04 — COMMUNICATION OBJECTIVE ═══
   {
-    id: 'S05', section: 'Communication Objective', layout: 'cardGrid', theme: 'lime',
+    id: 'S04', section: 'Communication Objective', layout: 'cardGrid', theme: 'lime',
     bgImage: 'https://static.wixstatic.com/media/227dff_67840e3bd3034422baf0278d10610704~mv2.png',
     headline: 'WHAT THIS PROJECT MUST ACHIEVE',
-    subheadline: 'Strengthening Mobily\'s brand equity.',
+    subheadline: 'This project strengthens Mobily\'s brand equity.',
     pillars: [
       { title: 'Youth Culture', text: 'Showing that Mobily genuinely understands youth culture and entertainment.' },
       { title: 'Music & Talent', text: 'Demonstrating deep understanding of music and emerging talent.' },
       { title: 'Present, Not Late', text: 'Mobily is not trying to join the scene late. Mobily understands where the scene is going.' },
-      { title: 'Next Generation', text: 'Mobily becomes a brand that feels present in the passions, habits, and creative energy of the next generation.' },
+      { title: 'Next Generation', text: 'Through Vyb, Mobily becomes a brand that feels present in the passions, habits, and creative energy of the next generation.' },
+    ],
+    body: [
+      'The message is direct:\nMobily is not trying to join the scene late.\nMobily understands where the scene is going.',
     ],
     textBlocks: [
       { type: 'kicker', content: 'Communication Objective', motion: 'spotlightFade' },
@@ -163,9 +153,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S06 — TARGET AUDIENCE ═══
+  // ═══ S05 — TARGET AUDIENCE ═══
   {
-    id: 'S06', section: 'Target Audience', layout: 'editorialSplit', theme: 'coral',
+    id: 'S05', section: 'Target Audience', layout: 'editorialSplit', theme: 'coral',
     bgImage: 'https://static.wixstatic.com/media/227dff_9e3a3910636d4b2885a15a4f9d75cffd~mv2.png',
     headline: 'TARGET AUDIENCE',
     pillars: [
@@ -173,8 +163,8 @@ const RAW_SLIDES: SlideData[] = [
       { title: 'Secondary', text: 'Mobily subscribers, fans of featured artists, aspiring singers, writers, rappers, creators, and wider lifestyle audiences.' },
     ],
     body: [
-      'The most committed fans are often more than fans. Many of them are future creators in disguise.',
-      'They do not just want to follow culture. They want a way into it.',
+      'Human insight: The most committed fans are often more than fans. Many of them are future creators in disguise.',
+      'They do not just want to follow culture.\nThey want a way into it.',
     ],
     textBlocks: [
       { type: 'kicker', content: 'Target Audience', motion: 'spotlightFade' },
@@ -182,16 +172,16 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S07 — THE BIG IDEA ═══
+  // ═══ S06 — THE BIG IDEA ═══
   {
-    id: 'S07', section: 'The Big Idea', layout: 'manifesto', theme: 'heroDark',
+    id: 'S06', section: 'The Big Idea', layout: 'manifesto', theme: 'heroDark',
     bgImage: 'https://static.wixstatic.com/media/227dff_7cc0ed1746294df4a9985b7fc3f03df6~mv2.gif',
     headline: 'A MUSIC STUDIO WHERE ARTISTS AND FANS BUILD A SONG TOGETHER',
     body: [
-      'Mobily creates a music studio format that brings together: 2 artists from different genres or worlds, 20 carefully selected super fans, 1 live co-creation process, 1 brand-new song.',
+      'Mobily creates a music studio format that brings together:\n2 artists from different genres or worlds\n20 carefully selected super fans\n1 live co-creation process\n1 brand-new song',
       'Inside the studio, fans are not treated as background. They become part of the making. They react, suggest, challenge, shape, and contribute to the creative journey.',
       'The episode ends with the first live performance of the new track.',
-      'This is not a filmed rehearsal. This is not a backstage interview. This is a real act of creation.',
+      'This is not a filmed rehearsal.\nThis is not a backstage interview.\nThis is a real act of creation.',
     ],
     textBlocks: [
       { type: 'headline', content: 'A MUSIC STUDIO WHERE ARTISTS AND FANS BUILD A SONG TOGETHER', motion: 'statementDrop' },
@@ -199,9 +189,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S08 — THE EPISODE FORMULA ═══
+  // ═══ S07 — THE EPISODE FORMULA ═══
   {
-    id: 'S08', section: 'Episode Formula', layout: 'timeline', theme: 'darkEditorial',
+    id: 'S07', section: 'Episode Formula', layout: 'timeline', theme: 'darkEditorial',
     headline: 'THE EPISODE FORMULA',
     subheadline: 'Every episode follows one simple structure.',
     timeline: [
@@ -222,9 +212,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S09 — WHY THE FORMAT WORKS ═══
+  // ═══ S08 — WHY THE FORMAT WORKS ═══
   {
-    id: 'S09', section: 'Why It Works', layout: 'editorialLeft', theme: 'blue',
+    id: 'S08', section: 'Why It Works', layout: 'editorialLeft', theme: 'blue',
     bgImage: 'https://static.wixstatic.com/media/227dff_5aa87a74e9734134a83f55cb45aaaedd~mv2.png',
     headline: 'WHY THE FORMAT WORKS',
     body: [
@@ -240,9 +230,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S10 — THE SECRET SESSION ═══
+  // ═══ S09 — THE SECRET SESSION ═══
   {
-    id: 'S10', section: 'The Secret Session', layout: 'editorialLeft', theme: 'heroDark',
+    id: 'S09', section: 'The Secret Session', layout: 'editorialLeft', theme: 'heroDark',
     bgImage: 'https://static.wixstatic.com/media/227dff_f00889dcf0e1443185e8ba399fcc7d80~mv2.gif',
     headline: 'THE SECRET SESSION',
     body: [
@@ -257,9 +247,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S11 — HOST OPTION 01: TEMSAH ═══
+  // ═══ S10 — HOST OPTION 01: TEMSAH ═══
   {
-    id: 'S11', section: 'Host Option 01', layout: 'portraitSplit', theme: 'teal',
+    id: 'S10', section: 'Host Option 01', layout: 'portraitSplit', theme: 'teal',
     headline: 'TEMSAH',
     subheadline: 'The satirist.',
     image: 'https://yt3.googleusercontent.com/ytc/AIdro_mLlnH3iqTmQjUKtDEh3EndCV3dgC4o-sJxiTbT71rfOfU=s800-c-k-c0x00ffffff-no-rj',
@@ -275,9 +265,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S12 — HOST OPTION 02: ABU HAMDAN ═══
+  // ═══ S11 — HOST OPTION 02: ABU HAMDAN ═══
   {
-    id: 'S12', section: 'Host Option 02', layout: 'editorialLeft', theme: 'blue',
+    id: 'S11', section: 'Host Option 02', layout: 'editorialLeft', theme: 'blue',
     bgImage: 'https://static.wixstatic.com/media/227dff_265294f1ab0d4ceb877bed522d0324c1~mv2.png',
     headline: 'ABU HAMDAN',
     subheadline: 'The producer.',
@@ -293,9 +283,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S13 — HOST OPTION 03: MOAYAD ═══
+  // ═══ S12 — HOST OPTION 03: MOAYAD ═══
   {
-    id: 'S13', section: 'Host Option 03', layout: 'editorialLeft', theme: 'cyan',
+    id: 'S12', section: 'Host Option 03', layout: 'editorialLeft', theme: 'cyan',
     headline: 'MOAYAD',
     subheadline: 'The creator.',
     body: [
@@ -310,9 +300,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S14 — FASHION INTEGRATION ═══
+  // ═══ S13 — FASHION INTEGRATION ═══
   {
-    id: 'S14', section: 'Fashion Integration', layout: 'editorialSplit', theme: 'coral',
+    id: 'S13', section: 'Fashion Integration', layout: 'editorialSplit', theme: 'coral',
     bgImage: 'https://static.wixstatic.com/media/227dff_9e3a3910636d4b2885a15a4f9d75cffd~mv2.png',
     headline: 'FASHION INTEGRATION',
     subheadline: 'Music is the entry point. Style is the amplifying layer.',
@@ -321,7 +311,7 @@ const RAW_SLIDES: SlideData[] = [
       { title: 'Culture Property', text: 'Fan looks that reflect community and subculture. This makes the project feel broader than music alone — a youth culture property.' },
     ],
     body: [
-      'The music gives it emotional depth. The fashion gives it visual memory.',
+      'The music gives it emotional depth.\nThe fashion gives it visual memory.',
     ],
     textBlocks: [
       { type: 'kicker', content: 'Fashion Integration', motion: 'spotlightFade' },
@@ -329,9 +319,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S15 — THE MECHANISM ═══
+  // ═══ S14 — THE MECHANISM ═══
   {
-    id: 'S15', section: 'The Mechanism', layout: 'cardGrid', theme: 'darkEditorial',
+    id: 'S14', section: 'The Mechanism', layout: 'cardGrid', theme: 'darkEditorial',
     bgImage: 'https://static.wixstatic.com/media/227dff_1d33f15c8a944a9d8d7b1678fa0d43a2~mv2.png',
     headline: 'THE MECHANISM',
     subheadline: 'The project works through three layers.',
@@ -350,9 +340,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S16 — SOCIAL MEDIA JOURNEY ═══
+  // ═══ S15 — SOCIAL MEDIA JOURNEY ═══
   {
-    id: 'S16', section: 'Social Media Journey', layout: 'timeline', theme: 'teal',
+    id: 'S15', section: 'Social Media Journey', layout: 'timeline', theme: 'teal',
     headline: 'SOCIAL MEDIA JOURNEY',
     subheadline: 'The social layer should not document the show. It should expand the show.',
     timeline: [
@@ -369,9 +359,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S17 — EMERGING ARTIST OPPORTUNITY ═══
+  // ═══ S16 — EMERGING ARTIST OPPORTUNITY ═══
   {
-    id: 'S17', section: 'Emerging Artist', layout: 'editorialLeft', theme: 'lime',
+    id: 'S16', section: 'Emerging Artist', layout: 'editorialLeft', theme: 'lime',
     bgImage: 'https://static.wixstatic.com/media/227dff_5aa87a74e9734134a83f55cb45aaaedd~mv2.png',
     headline: 'EMERGING ARTIST OPPORTUNITY',
     subheadline: 'From entertainment brand to talent enabler.',
@@ -387,9 +377,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S18 — DELIVERABLES PER EPISODE ═══
+  // ═══ S17 — DELIVERABLES PER EPISODE ═══
   {
-    id: 'S18', section: 'Deliverables', layout: 'metricsGrid', theme: 'analytics',
+    id: 'S17', section: 'Deliverables', layout: 'metricsGrid', theme: 'analytics',
     headline: 'DELIVERABLES PER EPISODE',
     subheadline: 'The value is in the full output stack.',
     stats: [
@@ -409,9 +399,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S19 — SEASON DELIVERABLES ═══
+  // ═══ S18 — SEASON DELIVERABLES ═══
   {
-    id: 'S19', section: 'Season Output', layout: 'metricsGrid', theme: 'lime',
+    id: 'S18', section: 'Season Output', layout: 'metricsGrid', theme: 'lime',
     bgImage: 'https://static.wixstatic.com/media/227dff_5aa87a74e9734134a83f55cb45aaaedd~mv2.png',
     headline: '10-EPISODE SEASON',
     subheadline: 'Mobily owns a growing entertainment library.',
@@ -432,9 +422,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S20 — HOW SUCCESS WILL BE MEASURED ═══
+  // ═══ S19 — HOW SUCCESS WILL BE MEASURED ═══
   {
-    id: 'S20', section: 'Success Metrics', layout: 'cardGrid', theme: 'analytics',
+    id: 'S19', section: 'Success Metrics', layout: 'cardGrid', theme: 'analytics',
     bgImage: 'https://static.wixstatic.com/media/227dff_2c54b8b40c4c40a7b112871a3119f28f~mv2.png',
     headline: 'HOW SUCCESS WILL BE MEASURED',
     pillars: [
@@ -451,9 +441,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S21 — SUGGESTED ARTIST PAIRINGS ═══
+  // ═══ S20 — SUGGESTED ARTIST PAIRINGS ═══
   {
-    id: 'S21', section: 'Artist Pairings', layout: 'editorialLeft', theme: 'blue',
+    id: 'S20', section: 'Artist Pairings', layout: 'editorialLeft', theme: 'blue',
     bgImage: 'https://static.wixstatic.com/media/227dff_265294f1ab0d4ceb877bed522d0324c1~mv2.png',
     headline: 'SUGGESTED ARTIST PAIRINGS',
     subheadline: 'Contrast creates curiosity. Curiosity creates conversation. Conversation creates content.',
@@ -468,15 +458,15 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S22 — WHY MOBILY SHOULD OWN THIS ═══
+  // ═══ S21 — WHY MOBILY SHOULD OWN THIS ═══
   {
-    id: 'S22', section: 'Ownership', layout: 'manifesto', theme: 'heroDark',
+    id: 'S21', section: 'Ownership', layout: 'manifesto', theme: 'heroDark',
     bgImage: 'https://static.wixstatic.com/media/227dff_7cc0ed1746294df4a9985b7fc3f03df6~mv2.gif',
     headline: 'WHY MOBILY SHOULD OWN THIS',
     body: [
       'This should not be framed as another sponsorship. It should be framed as a Mobily-owned entertainment property.',
       'Mobily owns: the format, the studio world, the content system, the music outputs, the audience relationship, the cultural memory attached to the project.',
-      'That makes Vyb more strategic than a campaign. A campaign ends. A property compounds.',
+      'That makes Vyb more strategic than a campaign.\nA campaign ends.\nA property compounds.',
     ],
     textBlocks: [
       { type: 'headline', content: 'WHY MOBILY SHOULD OWN THIS', motion: 'statementDrop' },
@@ -484,9 +474,9 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S23 — THE LONG-TERM VISION ═══
+  // ═══ S22 — THE LONG-TERM VISION ═══
   {
-    id: 'S23', section: 'Long-Term Vision', layout: 'editorialSplit', theme: 'teal',
+    id: 'S22', section: 'Long-Term Vision', layout: 'editorialSplit', theme: 'teal',
     bgImage: 'https://static.wixstatic.com/media/227dff_9ce0fae6211841f99404991888b212aa~mv2.png',
     headline: 'THE LONG-TERM VISION',
     subheadline: 'Mobily becomes the brand that helps organize, shape, and grow music culture.',
@@ -503,14 +493,14 @@ const RAW_SLIDES: SlideData[] = [
     ],
   },
 
-  // ═══ S24 — CLOSING ═══
+  // ═══ S23 — CLOSING ═══
   {
-    id: 'S24', section: 'Closing', layout: 'closing', theme: 'heroDark',
+    id: 'S23', section: 'Closing', layout: 'closing', theme: 'heroDark',
     headline: 'Mobily Vyb',
     bgVideo: 'https://video.wixstatic.com/video/227dff_c261b2ce87fd489e9dc47a2e67dbe3f4/1080p/mp4/file.mp4',
     subheadline: 'Where fans stop watching and start creating.',
     body: [
-      'A Mobily format built around: access, participation, music, discovery, delight.',
+      'A Mobily format built around:\naccess, participation, music, discovery, delight.',
       '2 artists. 20 super fans. 1 new track.',
     ],
     textBlocks: [

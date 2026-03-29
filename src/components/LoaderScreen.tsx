@@ -57,7 +57,7 @@ const LoaderScreen = ({ onStart }: LoaderScreenProps) => {
               className="type-display mb-6 md:mb-8 tracking-[-0.08em]"
               style={{ color: '#fff', fontSize: 'clamp(1.8rem, 8vw, 7rem)', maxWidth: '100%', overflowWrap: 'break-word' }}
             >
-              {formatText(lang === 'ar' ? 'جلسات Vyb الحيّة' : 'Vyb SESSIONS')}
+              {formatText(lang === 'ar' ? 'Mobily Vyb' : 'Mobily Vyb')}
             </h1>
             <p
               className="type-subtitle italic max-w-2xl mx-auto text-[clamp(0.85rem,3.5vw,1.5rem)]"

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "twilio-docs": {
+      "type": "remote",
+      "url": "https://mcp.twilio.com/docs",
+      "enabled": true,
+      "oauth": false
+    }
+  }
+}
